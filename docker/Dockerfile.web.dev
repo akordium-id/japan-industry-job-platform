@@ -1,0 +1,23 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+RUN corepack enable && corepack prepare pnpm@9.15.4 --activate
+
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml .npmrc turbo.json ./
+
+COPY apps/api/package.json ./apps/api/package.json
+COPY apps/web/package.json ./apps/web/package.json
+COPY packages/types/package.json ./packages/types/package.json
+COPY tooling/eslint/package.json ./tooling/eslint/package.json
+COPY tooling/typescript/package.json ./tooling/typescript/package.json
+
+RUN pnpm install --frozen-lockfile || pnpm install
+
+COPY . .
+
+WORKDIR /app/apps/web
+
+EXPOSE 5173
+
+CMD ["pnpm", "dev", "--host"]

@@ -1,0 +1,92 @@
+.tableWrapper {
+  overflow-x: auto;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+.thead {
+  background: var(--color-surface-2);
+}
+.th {
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+.tr {
+  border-bottom: 1px solid var(--color-border-soft);
+  transition: background var(--transition-fast);
+}
+.tr:hover {
+  background: var(--color-surface-2);
+}
+.td {
+  padding: var(--space-3) var(--space-4);
+  vertical-align: middle;
+  color: var(--color-text-primary);
+}
+
+.userName {
+  font-weight: var(--font-semibold);
+  color: var(--color-text-primary);
+}
+.userEmail {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+.docTitle {
+  font-weight: var(--font-medium);
+  color: var(--color-text-primary);
+}
+.docType {
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.05em;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+.viewLink {
+  text-decoration: none;
+}
+
+.paginationBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-2);
+  border-top: 1px solid var(--color-border-soft);
+  margin-top: var(--space-4);
+}
+.paginationInfo {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.pageSizeSelect {
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: var(--text-xs);
+  background: var(--color-surface);
+}
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.pageIndicator {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}

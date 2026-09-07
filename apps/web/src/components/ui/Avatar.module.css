@@ -1,0 +1,70 @@
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-2);
+  color: var(--color-text-primary);
+  font-weight: var(--font-semibold);
+  flex-shrink: 0;
+  border: 2px solid var(--color-border);
+  user-select: none;
+  overflow: hidden;
+}
+
+.xs {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+}
+.sm {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+.md {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+}
+.lg {
+  width: 56px;
+  height: 56px;
+  font-size: 18px;
+}
+.xl {
+  width: 80px;
+  height: 80px;
+  font-size: 24px;
+}
+
+.student {
+  background: var(--color-role-student);
+  color: var(--color-text-inverse);
+  border-color: var(--color-role-student);
+}
+.corporate {
+  background: var(--color-role-corporate);
+  color: var(--color-text-inverse);
+  border-color: var(--color-role-corporate);
+}
+.educator {
+  background: var(--color-role-educator);
+  color: var(--color-text-inverse);
+  border-color: var(--color-role-educator);
+}
+.silver {
+  background: var(--color-role-silver);
+  color: var(--color-text-inverse);
+  border-color: var(--color-role-silver);
+}
+.alumni {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-primary);
+}
+.admin {
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+  border-color: var(--color-accent);
+}
