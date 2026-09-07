@@ -1,0 +1,21 @@
+{
+  "name": "@jijp/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./base": "./src/base.js",
+    "./node": "./src/node.js",
+    "./react": "./src/react.js"
+  },
+  "files": ["src"],
+  "dependencies": {
+    "@eslint/js": "^9.17.0",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react": "^7.37.3",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "globals": "^15.14.0"
+  }
+}
