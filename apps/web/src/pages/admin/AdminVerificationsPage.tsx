@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { StatCard } from "@/components/ui/StatCard";
 import { Badge } from "@/components/ui/Badge";
+import { toast } from "@/components/ui/sonner";
 
 export default function AdminVerificationsPage() {
   const { user } = useAuth();
@@ -35,8 +36,15 @@ export default function AdminVerificationsPage() {
     decideMutation.mutate(
       { id, action },
       {
+        onSuccess: () => {
+          toast.success(
+            `Document #${id} has been ${action === "approved" ? "approved" : "rejected"}.`,
+          );
+        },
         onError: (e) => {
-          alert(e instanceof Error ? e.message : "Failed to process document");
+          toast.error(
+            e instanceof Error ? e.message : "Failed to process document",
+          );
         },
       },
     );
@@ -49,9 +57,12 @@ export default function AdminVerificationsPage() {
     batchDecideMutation.mutate(
       { ids: pendingIds, action: "approved" },
       {
-        onSuccess: () => alert("All pending documents approved."),
+        onSuccess: () =>
+          toast.success(`All ${pendingIds.length} pending documents approved.`),
         onError: (e) =>
-          alert(e instanceof Error ? e.message : "Failed to batch approve."),
+          toast.error(
+            e instanceof Error ? e.message : "Failed to batch approve.",
+          ),
       },
     );
   }

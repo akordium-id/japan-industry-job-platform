@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useJobs, useMyApplications, useApplyJob } from "@/api/hooks";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { toast } from "@/components/ui/sonner";
 
 const JLPT = ["", "N5", "N4", "N3", "N2", "N1"];
 
@@ -60,16 +61,19 @@ export default function JobsBoardPage() {
       { jobId: id },
       {
         onSuccess: () => {
+          toast.success(`Application for "${jobTitle}" sent to the company!`);
           setAlertMsg({
             kind: "ok",
             text: `Application for "${jobTitle}" sent to the company!`,
           });
         },
         onError: (e) => {
+          const msg =
+            e instanceof Error ? e.message : "Failed to send application.";
+          toast.error(msg);
           setAlertMsg({
             kind: "err",
-            text:
-              e instanceof Error ? e.message : "Failed to send application.",
+            text: msg,
           });
         },
       },

@@ -1,43 +1,98 @@
-import styles from "./ProgressBar.module.css";
+import * as React from "react";
+import * as ProgressPrimitive from "@radix-ui/react-progress";
+import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-interface ProgressBarProps {
-  value: number;
+const progressTrackVariants = cva(
+  "relative w-full overflow-hidden rounded-full bg-[var(--color-surface-3)]",
+  {
+    variants: {
+      size: {
+        sm: "h-1.5",
+        md: "h-2.5",
+        lg: "h-4",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  },
+);
+
+const progressFillVariants = cva(
+  "h-full w-full flex-1 transition-all duration-300 ease-in-out",
+  {
+    variants: {
+      variant: {
+        default: "bg-[var(--color-primary)]",
+        success: "bg-[var(--color-success)]",
+        warning: "bg-[var(--color-warning)]",
+        accent: "bg-[var(--color-accent)]",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+);
+
+export interface ProgressBarProps
+  extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>,
+    VariantProps<typeof progressTrackVariants>,
+    VariantProps<typeof progressFillVariants> {
+  value?: number;
   label?: string;
   showValue?: boolean;
-  variant?: "default" | "success" | "warning" | "accent";
-  size?: "sm" | "md" | "lg";
   animated?: boolean;
 }
 
-export function ProgressBar({
-  value,
-  label,
-  showValue = true,
-  variant = "default",
-  size = "md",
-  animated = true,
-}: ProgressBarProps) {
-  const clamped = Math.min(100, Math.max(0, value));
-  return (
-    <div className={styles["wrapper"]}>
-      {(label || showValue) && (
-        <div className={styles["meta"]}>
-          {label && <span className={styles["label"]}>{label}</span>}
-          {showValue && <span className={styles["value"]}>{clamped}%</span>}
-        </div>
-      )}
-      <div className={cn(styles["track"], styles[size])}>
-        <div
-          className={cn(
-            styles["fill"],
-            styles[variant],
-            animated && styles["animated"],
-          )}
-          style={{ width: `${clamped}%` }}
-        />
+const ProgressBar = React.forwardRef<
+  React.ElementRef<typeof ProgressPrimitive.Root>,
+  ProgressBarProps
+>(
+  (
+    {
+      className,
+      value = 0,
+      label,
+      showValue = true,
+      variant = "default",
+      size = "md",
+      animated = true,
+      ...props
+    },
+    ref,
+  ) => {
+    const clamped = Math.min(100, Math.max(0, value || 0));
+
+    return (
+      <div className="w-full space-y-1.5">
+        {(label || showValue) && (
+          <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)] font-medium">
+            {label && <span className="text-[var(--color-text-primary)]">{label}</span>}
+            {showValue && <span>{clamped}%</span>}
+          </div>
+        )}
+        <ProgressPrimitive.Root
+          ref={ref}
+          className={cn(progressTrackVariants({ size }), className)}
+          value={clamped}
+          {...props}
+        >
+          <ProgressPrimitive.Indicator
+            className={cn(
+              progressFillVariants({ variant }),
+              animated && "transition-all duration-500",
+            )}
+            style={{ transform: `translateX(-${100 - clamped}%)` }}
+          />
+        </ProgressPrimitive.Root>
       </div>
-    </div>
-  );
-}
+    );
+  },
+);
+
+ProgressBar.displayName = "ProgressBar";
+
+export { ProgressBar };

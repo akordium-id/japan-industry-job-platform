@@ -1,6 +1,76 @@
+@import "tailwindcss";
 @import "@fontsource-variable/outfit";
 @import "@fontsource-variable/raleway";
 @import "./variables.css";
+
+@theme {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --font-sans: "Outfit Variable", "Raleway Variable", "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --background: #f8f9fa;
+  --foreground: #1f2937;
+
+  --card: #ffffff;
+  --card-foreground: #1f2937;
+
+  --popover: #ffffff;
+  --popover-foreground: #1f2937;
+
+  /* Primary Deep Navy */
+  --primary: #0f2c59;
+  --primary-foreground: #ffffff;
+
+  /* Secondary */
+  --secondary: #f1f3f5;
+  --secondary-foreground: #1f2937;
+
+  /* Muted */
+  --muted: #f1f3f5;
+  --muted-foreground: #6b7280;
+
+  /* Accent Japan Crimson */
+  --accent: #d32f2f;
+  --accent-foreground: #ffffff;
+
+  /* Destructive */
+  --destructive: #e74c3c;
+  --destructive-foreground: #ffffff;
+
+  /* Borders & Inputs */
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #0f2c59;
+
+  --radius: 0.5rem;
+}
 
 *,
 *::before,
