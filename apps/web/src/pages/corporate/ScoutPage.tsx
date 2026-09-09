@@ -146,7 +146,7 @@ function ScoutModal({ candidate, jobs, onClose, onSuccess }: ScoutModalProps) {
                     fontSize: "var(--text-sm)",
                   }}
                 >
-                  No active jobs. Create one in "Manage jobs" first.
+                  No active jobs. Create one in &quot;Manage jobs&quot; first.
                 </p>
               ) : (
                 <select
@@ -216,10 +216,9 @@ export default function ScoutPage() {
   });
 
   const { data: jobsResponse, isLoading: loadingJobs } = useJobs();
-  const rawJobs = jobsResponse?.jobs ?? [];
   const activeJobs = useMemo(
-    () => rawJobs.filter((j) => j.is_active === 1),
-    [rawJobs],
+    () => (jobsResponse?.jobs ?? []).filter((j) => j.is_active === 1),
+    [jobsResponse?.jobs],
   );
 
   function handleFilterSubmit(e?: React.FormEvent) {

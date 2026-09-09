@@ -142,7 +142,7 @@ function InterviewModal({ candidate, jobs, onClose }: InterviewModalProps) {
                     fontSize: "var(--text-sm)",
                   }}
                 >
-                  No active jobs. Create one in "Manage jobs" first.
+                  No active jobs. Create one in &quot;Manage jobs&quot; first.
                 </p>
               ) : (
                 <select
@@ -201,7 +201,7 @@ export default function CorporateDashboard() {
   const { data: rawCandidates = [], isLoading: loadingCandidates } =
     useScoutCandidates();
   const { data: jobsResponse } = useJobs();
-  const jobs = jobsResponse?.jobs ?? [];
+
 
   const [search, setSearch] = useState("");
   const [jlptFilter, setJlptFilter] = useState<"All" | "N3" | "N4" | "N5">(
@@ -252,8 +252,8 @@ export default function CorporateDashboard() {
   }
 
   const activeJobs = useMemo(
-    () => jobs.filter((j) => j.is_active === 1),
-    [jobs],
+    () => (jobsResponse?.jobs ?? []).filter((j) => j.is_active === 1),
+    [jobsResponse?.jobs],
   );
 
   return (
@@ -630,7 +630,7 @@ export default function CorporateDashboard() {
                 fontSize: "var(--text-sm)",
               }}
             >
-              Generate JIS-standard Rirekisho (履歴書) PDF from a candidate's
+              Generate JIS-standard Rirekisho (履歴書) PDF from a candidate&apos;s
               profile.
             </p>
           </div>

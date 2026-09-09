@@ -26,7 +26,7 @@ export default function AdminVerificationsPage() {
   if (user && user.role !== "admin") {
     return (
       <div style={{ padding: "4rem var(--container-px)", textAlign: "center" }}>
-        You don't have access to this page.
+        You don&apos;t have access to this page.
       </div>
     );
   }

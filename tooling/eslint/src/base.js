@@ -6,6 +6,7 @@ import importPlugin from "eslint-plugin-import";
 /** @type {import("eslint").Linter.Config[]} */
 export default [
   js.configs.recommended,
+  tsPlugin.configs["flat/eslint-recommended"],
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {

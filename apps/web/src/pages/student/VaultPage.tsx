@@ -70,7 +70,7 @@ export default function VaultPage() {
   }, [docs]);
 
   const displayDocs = useMemo(() => {
-    let filtered =
+    const filtered =
       activeTab === "all"
         ? [...docs]
         : docs.filter((d) => d.type === activeTab);

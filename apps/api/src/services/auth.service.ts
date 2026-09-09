@@ -106,7 +106,7 @@ export async function validateSsoToken(token: string): Promise<SsoResult> {
   const email = validated.email;
   const name = validated.name;
 
-  let existing = await findByIceUuidOrEmail(externalId, email);
+  const existing = await findByIceUuidOrEmail(externalId, email);
   let userId: number;
   let role: UserRole = "student";
 
