@@ -363,7 +363,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <section style={{ padding: "var(--space-12) var(--container-px)" }}>
+      <section id="roles" style={{ padding: "var(--space-12) var(--container-px)" }}>
         <div
           style={{
             maxWidth: "var(--content-max-width)",
@@ -421,6 +421,7 @@ export default function Landing() {
       </section>
 
       <section
+        id="stats"
         style={{
           padding: "var(--space-12) var(--container-px)",
           background: "var(--color-surface-2)",
@@ -515,7 +516,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <section style={{ padding: "var(--space-12) var(--container-px)" }}>
+      <section id="features" style={{ padding: "var(--space-12) var(--container-px)" }}>
         <div style={{ maxWidth: "var(--content-max-width)", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "var(--space-8)" }}>
             <h2>Integrated ecosystem</h2>

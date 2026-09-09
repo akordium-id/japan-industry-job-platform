@@ -168,7 +168,7 @@ export default function StudentDashboard() {
   }, [user, validDocs, hasCv, overallProgress]);
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="max-w-[var(--content-max-width)] mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 animate-fade-in">
       {/* 1. Action-Oriented Hero Banner */}
       <ActionHero
         user={user}

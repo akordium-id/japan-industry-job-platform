@@ -11,6 +11,9 @@ import {
   LogOut,
   Menu,
   ChevronDown,
+  CheckCircle2,
+  AlertCircle,
+  Calendar,
 } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
@@ -38,13 +41,20 @@ import type { AppRole } from "@/api/auth";
 import { cn } from "@/lib/utils";
 
 const ROLE_LABELS: Record<AppRole, string> = {
-  student: "Student",
+  student: "Candidate",
   corporate: "Corporate HR",
-  educator_bilingual: "Educator — Bilingual",
+  educator_bilingual: "Bilingual Educator",
   educator_silver: "Senior Mentor",
   alumni: "Alumni",
-  admin: "Admin",
+  admin: "Administrator",
 };
+
+const PUBLIC_NAV_LINKS = [
+  { to: "/#roles", label: "Program Roles" },
+  { to: "/#features", label: "Ecosystem" },
+  { to: "/#stats", label: "Platform Stats" },
+  { to: "/student/jobs", label: "Explore Jobs" },
+];
 
 const ROLE_COLORS: Record<
   AppRole,
@@ -75,10 +85,11 @@ export function Navbar() {
       case "student":
         return [
           { to: "/student", label: "Dashboard" },
-          { to: "/student/courses", label: "Courses" },
+          { to: "/student/courses", label: "Learning Track" },
           { to: "/student/vault", label: "Document Vault" },
-          { to: "/student/cv", label: "CV Builder" },
-          { to: "/student/jobs", label: "Jobs" },
+          { to: "/student/cv", label: "Japanese Rirekisho" },
+          { to: "/student/jobs", label: "Jobs & Matching" },
+          { to: "/student/calendar", label: "Calendar" },
           { to: "/career", label: "Career Timeline" },
         ];
       case "corporate":
@@ -89,9 +100,16 @@ export function Navbar() {
         ];
       case "educator_bilingual":
       case "educator_silver":
-        return [{ to: "/educator", label: "Educator Portal" }];
+        return [
+          { to: "/educator", label: "Educator Portal" },
+          { to: "/student/calendar", label: "Training Calendar" },
+        ];
       case "alumni":
-        return [{ to: "/career", label: "Career Timeline" }];
+        return [
+          { to: "/career", label: "Career Timeline" },
+          { to: "/student/profile", label: "My Profile" },
+          { to: "/student/jobs", label: "Opportunities" },
+        ];
       case "admin":
         return [
           { to: "/admin/verifications", label: "Document Verification" },
@@ -106,46 +124,111 @@ export function Navbar() {
   const roleKey = user ? ROLE_COLORS[user.role as AppRole] : null;
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-[var(--color-surface)]/90 backdrop-blur-md transition-all">
-      <div className="mx-auto flex h-14 md:h-16 max-w-[var(--content-max-width)] items-center justify-between px-4 sm:px-6">
+    <header className="sticky top-0 z-40 w-full border-b border-slate-200/90 bg-white/95 backdrop-blur-md transition-all">
+      <div
+        style={{
+          maxWidth: "calc(var(--content-max-width) + var(--container-px) * 2)",
+          paddingLeft: "var(--container-px)",
+          paddingRight: "var(--container-px)",
+        }}
+        className="mx-auto flex h-14 md:h-16 items-center justify-between w-full"
+      >
         {/* Left: Brand logo */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           <NavLink
             to="/"
-            className="flex items-center gap-2 text-decoration-none"
+            className="flex items-center gap-2.5 no-underline select-none group shrink-0"
             onClick={() => setMobileNavOpen(false)}
           >
-            <span className="font-extrabold text-lg sm:text-xl tracking-tight text-[var(--color-accent)]">
-              {BRAND_NAME}
-            </span>
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-red-600 text-white font-black text-xs shadow-xs tracking-tighter shrink-0 transition-transform group-hover:scale-105">
+              JP
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="font-extrabold text-base tracking-tight text-slate-900 leading-tight group-hover:text-red-600 transition-colors">
+                {BRAND_NAME}
+              </span>
+              <span className="hidden sm:inline-block text-[10px] font-medium text-slate-400 -mt-0.5">
+                Japan Career Bridge
+              </span>
+            </div>
           </NavLink>
 
           {/* Desktop Nav Links */}
-          {isAuthenticated && (
-            <nav className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  end
-                  className={({ isActive }) =>
-                    cn(
-                      "px-3 py-1.5 rounded-lg text-sm font-medium transition-colors",
-                      isActive
-                        ? "bg-[var(--color-surface-2)] text-[var(--color-accent)] font-semibold shadow-2xs"
-                        : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-2)]/60",
-                    )
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-            </nav>
-          )}
+          <nav className="hidden lg:flex items-center gap-1">
+            {isAuthenticated
+              ? navLinks.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    end={
+                      link.to === "/student" ||
+                      link.to === "/corporate" ||
+                      link.to === "/educator"
+                    }
+                    className={({ isActive }) =>
+                      cn(
+                        "px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors no-underline",
+                        isActive
+                          ? "bg-slate-100 text-red-600 font-bold shadow-2xs"
+                          : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70",
+                      )
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                ))
+              : PUBLIC_NAV_LINKS.map((link) =>
+                  link.to.startsWith("/#") ? (
+                    <a
+                      key={link.to}
+                      href={link.to.replace("/", "")}
+                      className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 transition-colors no-underline"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <NavLink
+                      key={link.to}
+                      to={link.to}
+                      className={({ isActive }) =>
+                        cn(
+                          "px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors no-underline",
+                          isActive
+                            ? "bg-slate-100 text-red-600 font-bold shadow-2xs"
+                            : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70",
+                        )
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  ),
+                )}
+          </nav>
         </div>
 
         {/* Right Section */}
         <div className="flex items-center gap-3">
+          {/* Student Verification Status Pill */}
+          {isAuthenticated && user && user.role === "student" && (
+            <div className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border bg-slate-100 border-slate-200">
+              {user.profileVerified ? (
+                <>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="text-slate-900 font-medium">
+                    Verified
+                  </span>
+                </>
+              ) : (
+                <>
+                  <AlertCircle className="w-3.5 h-3.5 text-amber-500" />
+                  <span className="text-slate-600 font-medium">
+                    Verification Pending
+                  </span>
+                </>
+              )}
+            </div>
+          )}
+
           {isAuthenticated && user && <NotificationsBell />}
 
           {isAuthenticated && user && roleKey ? (
@@ -153,24 +236,24 @@ export function Navbar() {
               <DropdownMenuTrigger asChild>
                 <button
                   type="button"
-                  className="flex items-center gap-2.5 rounded-xl border border-transparent p-1.5 hover:border-[var(--color-border)] hover:bg-[var(--color-surface-2)] transition-all cursor-pointer focus:outline-hidden"
+                  className="flex items-center gap-2.5 rounded-xl border border-transparent p-1.5 hover:border-slate-200 hover:bg-slate-100 transition-all cursor-pointer focus:outline-hidden"
                 >
                   <Avatar name={user.name} size="sm" role={roleKey} />
                   <div className="hidden sm:flex flex-col text-left">
-                    <span className="text-xs font-semibold leading-tight text-[var(--color-text-primary)]">
+                    <span className="text-xs font-semibold leading-tight text-slate-900">
                       {user.name}
                     </span>
-                    <span className="text-[11px] font-medium text-[var(--color-text-secondary)]">
+                    <span className="text-[11px] font-medium text-slate-500">
                       {ROLE_LABELS[user.role as AppRole]}
                     </span>
                   </div>
-                  <ChevronDown className="h-4 w-4 text-[var(--color-text-tertiary)]" />
+                  <ChevronDown className="h-4 w-4 text-slate-400" />
                 </button>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent
                 align="end"
-                className="w-72 p-2 shadow-xl rounded-xl border-[var(--color-border)]"
+                className="w-72 p-2 shadow-xl rounded-xl border-slate-200 bg-white"
               >
                 <DropdownMenuLabel className="font-normal p-2">
                   <div className="flex items-center gap-3">
@@ -254,6 +337,20 @@ export function Navbar() {
                         </div>
                       </Link>
                     </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link
+                        to="/student/calendar"
+                        className="cursor-pointer gap-2.5"
+                      >
+                        <Calendar className="h-4 w-4 text-[var(--color-text-secondary)]" />
+                        <div>
+                          <p className="text-sm font-medium">Class Calendar</p>
+                          <p className="text-[11px] text-[var(--color-text-tertiary)]">
+                            Training & mentor sessions
+                          </p>
+                        </div>
+                      </Link>
+                    </DropdownMenuItem>
                   </>
                 )}
 
@@ -316,7 +413,7 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="hidden sm:flex items-center gap-2">
               <Link to="/login">
                 <Button variant="ghost" size="sm">
                   Sign in
@@ -331,64 +428,110 @@ export function Navbar() {
           )}
 
           {/* Mobile hamburger navigation via Sheet */}
-          {isAuthenticated && navLinks.length > 0 && (
-            <div className="lg:hidden">
-              <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
-                <SheetTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="p-2 h-9 w-9"
-                    aria-label="Toggle navigation menu"
-                  >
-                    <Menu className="h-5 w-5" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent
-                  side="right"
-                  className="w-[300px] sm:w-[360px] flex flex-col"
+          <div className="lg:hidden flex items-center gap-2">
+            {!isAuthenticated && (
+              <Link to="/login" className="sm:hidden">
+                <Button variant="primary" size="sm">
+                  Sign in
+                </Button>
+              </Link>
+            )}
+
+            <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 h-9 w-9"
+                  aria-label="Toggle navigation menu"
                 >
-                  <SheetHeader className="border-b border-[var(--color-border)] pb-4 text-left">
-                    <SheetTitle className="text-lg font-bold text-[var(--color-accent)]">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="right"
+                className="w-[300px] sm:w-[360px] flex flex-col bg-white border-slate-200"
+              >
+                <SheetHeader className="border-b border-slate-200 pb-4 text-left">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-red-600 text-white font-black text-xs shadow-xs">
+                      JP
+                    </div>
+                    <SheetTitle className="text-base font-bold text-slate-900">
                       {BRAND_NAME}
                     </SheetTitle>
-                    {user && (
-                      <div className="flex items-center gap-2.5 mt-2">
-                        <Avatar name={user.name} size="sm" role={roleKey} />
-                        <div className="flex flex-col">
-                          <span className="text-sm font-semibold leading-tight">
-                            {user.name}
-                          </span>
-                          <span className="text-xs text-[var(--color-text-secondary)]">
-                            {ROLE_LABELS[user.role as AppRole]}
-                          </span>
-                        </div>
+                  </div>
+                  {user && roleKey && (
+                    <div className="flex items-center gap-2.5 mt-3 pt-3 border-t border-slate-200">
+                      <Avatar name={user.name} size="sm" role={roleKey} />
+                      <div className="flex flex-col">
+                        <span className="text-sm font-semibold leading-tight text-slate-900">
+                          {user.name}
+                        </span>
+                        <span className="text-xs text-slate-500">
+                          {ROLE_LABELS[user.role as AppRole] || user.role}
+                        </span>
                       </div>
-                    )}
-                  </SheetHeader>
+                    </div>
+                  )}
+                </SheetHeader>
 
-                  <nav className="flex-1 overflow-y-auto py-4 flex flex-col gap-1">
-                    {navLinks.map((link) => (
-                      <NavLink
-                        key={link.to}
-                        to={link.to}
-                        end
-                        className={({ isActive }) =>
-                          cn(
-                            "flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
-                            isActive
-                              ? "bg-[var(--color-surface-2)] text-[var(--color-accent)] font-semibold"
-                              : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-2)]/60",
-                          )
-                        }
-                        onClick={() => setMobileNavOpen(false)}
-                      >
-                        {link.label}
-                      </NavLink>
-                    ))}
-                  </nav>
+                <nav className="flex-1 overflow-y-auto py-4 flex flex-col gap-1">
+                  {isAuthenticated
+                    ? navLinks.map((link) => (
+                        <NavLink
+                          key={link.to}
+                          to={link.to}
+                          end={
+                            link.to === "/student" ||
+                            link.to === "/corporate" ||
+                            link.to === "/educator"
+                          }
+                          className={({ isActive }) =>
+                            cn(
+                              "flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-colors no-underline",
+                              isActive
+                                ? "bg-slate-100 text-red-600 font-semibold"
+                                : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
+                            )
+                          }
+                          onClick={() => setMobileNavOpen(false)}
+                        >
+                          {link.label}
+                        </NavLink>
+                      ))
+                    : PUBLIC_NAV_LINKS.map((link) =>
+                        link.to.startsWith("/#") ? (
+                          <a
+                            key={link.to}
+                            href={link.to.replace("/", "")}
+                            className="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors no-underline"
+                            onClick={() => setMobileNavOpen(false)}
+                          >
+                            {link.label}
+                          </a>
+                        ) : (
+                          <NavLink
+                            key={link.to}
+                            to={link.to}
+                            className={({ isActive }) =>
+                              cn(
+                                "flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-colors no-underline",
+                                isActive
+                                  ? "bg-slate-100 text-red-600 font-semibold"
+                                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
+                              )
+                            }
+                            onClick={() => setMobileNavOpen(false)}
+                          >
+                            {link.label}
+                          </NavLink>
+                        ),
+                      )}
+                </nav>
 
-                  <div className="border-t border-[var(--color-border)] pt-4 mt-auto">
+                <div className="border-t border-slate-200 pt-4 mt-auto">
+                  {isAuthenticated ? (
                     <Button
                       variant="danger"
                       size="sm"
@@ -398,11 +541,32 @@ export function Navbar() {
                     >
                       Sign out
                     </Button>
-                  </div>
-                </SheetContent>
-              </Sheet>
-            </div>
-          )}
+                  ) : (
+                    <div className="flex flex-col gap-2">
+                      <Link
+                        to="/login"
+                        onClick={() => setMobileNavOpen(false)}
+                        className="w-full"
+                      >
+                        <Button variant="ghost" size="sm" fullWidth>
+                          Sign in
+                        </Button>
+                      </Link>
+                      <Link
+                        to="/register"
+                        onClick={() => setMobileNavOpen(false)}
+                        className="w-full"
+                      >
+                        <Button variant="primary" size="sm" fullWidth>
+                          Sign up
+                        </Button>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>
