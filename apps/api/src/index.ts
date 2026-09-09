@@ -10,7 +10,7 @@ app.listen(env.PORT, () => {
   );
 });
 
-const shutdown = (signal: NodeJS.Signals) => {
+const shutdown = (signal: string) => {
   console.log(`[api] received ${signal}, closing`);
   process.exit(0);
 };

@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+
 import styles from "./StatCard.module.css";
+
+import { cn } from "@/lib/utils";
 
 interface StatCardProps {
   label: string;

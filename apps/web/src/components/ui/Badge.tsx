@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+
 import styles from "./Badge.module.css";
+
+import { cn } from "@/lib/utils";
 
 type BadgeVariant =
   | "default"

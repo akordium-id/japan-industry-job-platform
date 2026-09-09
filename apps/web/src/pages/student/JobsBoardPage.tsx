@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { useJobs, useMyApplications, useApplyJob } from "@/api/hooks";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";

@@ -1,11 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
-import { Avatar } from "@/components/ui/Avatar";
-import { Badge } from "@/components/ui/Badge";
-import NotificationsBell from "@/components/ui/NotificationsBell";
-import { BRAND_NAME } from "@/lib/constants";
-import type { AppRole } from "@/api/auth";
 import {
   User,
   FolderLock,
@@ -16,8 +10,17 @@ import {
   ShieldCheck,
   LogOut,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+
 import styles from "./Navbar.module.css";
+
+import { useAuth } from "@/contexts/AuthContext";
+import { Avatar } from "@/components/ui/Avatar";
+import { Badge } from "@/components/ui/Badge";
+import NotificationsBell from "@/components/ui/NotificationsBell";
+import { BRAND_NAME } from "@/lib/constants";
+import type { AppRole } from "@/api/auth";
+import { cn } from "@/lib/utils";
+
 
 const ROLE_LABELS: Record<AppRole, string> = {
   student: "Student",

@@ -1,5 +1,6 @@
 import { useState, type FormEvent, useMemo } from "react";
 import { Link } from "react-router-dom";
+
 import { useAuth } from "@/contexts/AuthContext";
 import { useScoutCandidates, useJobs } from "@/api/hooks";
 import { jobApi, type ScoutCandidate } from "@/api/jobs";

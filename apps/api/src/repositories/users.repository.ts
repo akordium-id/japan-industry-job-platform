@@ -1,6 +1,7 @@
-import { getPool } from "../db/pool.js";
 import type { RowDataPacket, ResultSetHeader } from "mysql2";
 import type { UserRole } from "@jijp/types";
+
+import { getPool } from "../db/pool.js";
 
 export interface UserRow extends RowDataPacket {
   id: number;

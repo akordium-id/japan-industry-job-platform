@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import { FileText, Users, Check, X, Clock, MailOpen } from "lucide-react";
+
 import { useAuth } from "@/contexts/AuthContext";
 import { jobApi } from "@/api/jobs";
 import { cvApi } from "@/api/cv";
@@ -9,7 +11,6 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Modal } from "@/components/ui/Modal";
-import { FileText, Users, Check, X, Clock, MailOpen } from "lucide-react";
 
 const EMPTY_FORM = {
   companyId: 0,

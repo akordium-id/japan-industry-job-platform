@@ -1,5 +1,6 @@
-import { cn } from "@/lib/utils";
 import styles from "./Avatar.module.css";
+
+import { cn } from "@/lib/utils";
 
 interface AvatarProps {
   name: string;

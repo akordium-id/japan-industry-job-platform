@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { useAuth } from "@/contexts/AuthContext";
 import { CAREER_MILESTONES, type CareerMilestone } from "@/data/mockData";
 import { Card } from "@/components/ui/Card";

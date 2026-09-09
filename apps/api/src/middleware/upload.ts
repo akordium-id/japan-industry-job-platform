@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import multer, { type FileFilterCallback } from "multer";
-import type { Request } from "express";
+import type { Express, Request } from "express";
 
 import { env } from "../config/env.js";
 

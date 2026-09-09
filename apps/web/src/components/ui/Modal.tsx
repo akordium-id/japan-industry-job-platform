@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import type { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+
 import styles from "./Modal.module.css";
+
+import { cn } from "@/lib/utils";
 
 interface ModalProps {
   isOpen: boolean;

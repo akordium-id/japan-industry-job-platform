@@ -1,5 +1,4 @@
 import { Router, type Request, type Response } from "express";
-
 import { jobPostingSchema } from "@jijp/validators";
 
 import { requireAuth } from "../middleware/auth.js";

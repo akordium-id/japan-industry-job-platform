@@ -4,6 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
+
 import { useCalendarEvents } from "@/api/hooks";
 import type { CalendarEvent } from "@/api/calendar";
 import { Card } from "@/components/ui/Card";

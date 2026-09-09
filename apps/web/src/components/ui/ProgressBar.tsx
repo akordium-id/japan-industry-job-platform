@@ -1,5 +1,6 @@
-import { cn } from "@/lib/utils";
 import styles from "./ProgressBar.module.css";
+
+import { cn } from "@/lib/utils";
 
 interface ProgressBarProps {
   value: number;

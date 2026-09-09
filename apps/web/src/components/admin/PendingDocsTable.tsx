@@ -6,10 +6,12 @@ import {
   flexRender,
   type ColumnDef,
 } from "@tanstack/react-table";
+
+import styles from "./PendingDocsTable.module.css";
+
 import { documentApi, type VaultDoc } from "@/api/documents";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import styles from "./PendingDocsTable.module.css";
 
 type PendingDoc = VaultDoc & { user_name: string; user_email: string };
 

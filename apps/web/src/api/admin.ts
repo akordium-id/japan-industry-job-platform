@@ -1,4 +1,5 @@
 import type { ApiResponse } from "@jijp/types";
+
 import type { VaultDoc, DocStatus } from "./documents";
 
 const BASE = import.meta.env.VITE_API_URL ?? "";

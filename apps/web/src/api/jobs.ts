@@ -1,4 +1,5 @@
 import type { ApiResponse } from "@jijp/types";
+
 import type {
   JobApplication,
   Company,

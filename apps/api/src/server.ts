@@ -2,7 +2,6 @@ import cors from "cors";
 import express, { type Express } from "express";
 import session from "express-session";
 import helmet from "helmet";
-import morgan from "morgan";
 
 import { env } from "./config/env.js";
 import { errorHandler } from "./middleware/error.js";
@@ -10,7 +9,9 @@ import { jsonSanitizer } from "./middleware/sanitize.js";
 import { notFoundHandler } from "./middleware/notFound.js";
 import { globalLimiter } from "./middleware/rateLimit.js";
 import { requireAuth } from "./middleware/auth.js";
-
+import { httpLogger } from "./lib/logger.js";
+import { createSessionStore } from "./lib/sessionStore.js";
+import { docsRouter, spec } from "./routes/docs.js";
 import { healthRouter } from "./routes/health.js";
 import { authRouter } from "./routes/auth.js";
 import { usersRouter } from "./routes/users.js";
@@ -54,8 +55,11 @@ export function createServer(): Express {
     }),
   );
 
+  const sessionStore = createSessionStore();
+
   app.use(
     session({
+      store: sessionStore,
       secret: env.SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
@@ -68,11 +72,17 @@ export function createServer(): Express {
     }),
   );
 
-  app.use(morgan(env.NODE_ENV === "production" ? "combined" : "dev"));
+  app.use(httpLogger);
   app.use(jsonSanitizer);
   app.use(globalLimiter);
 
+  app.get("/", (_req, res) => {
+    res.json({ success: true, data: { message: "JIJP API is running." } });
+  });
+
   app.use("/api/health", healthRouter);
+  app.use("/api/docs", docsRouter);
+  app.use("/api/docs.json", (_req, res) => res.json(spec));
 
   app.use("/api/auth", authRouter);
 

@@ -360,3 +360,108 @@ export const STUDENT_PROGRESS: StudentProgress[] = [
     notes: "Highly proactive. Ready for Phase 3.",
   },
 ];
+
+export interface MockUser {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  title: string;
+  company?: string;
+  nameJp?: string;
+}
+
+export const MOCK_USERS: MockUser[] = [
+  {
+    id: "u-001",
+    name: "Budi Santoso",
+    email: "budi@student.jijp.id",
+    role: "student",
+    title: "Kandidat Program Teknik Manufaktur",
+  },
+  {
+    id: "u-002",
+    name: "Tanaka Hiroshi",
+    nameJp: "田中 浩",
+    email: "tanaka@recruit.co.jp",
+    role: "corporate",
+    company: "Tanaka Manufacturing Co., Ltd.",
+    title: "HR Manager",
+  },
+  {
+    id: "u-003",
+    name: "Sari Indrawati",
+    email: "sari@educator.jijp.id",
+    role: "educator_bilingual",
+    title: "Instruktur Bahasa Jepang N3",
+  },
+  {
+    id: "u-004",
+    name: "Yamamoto Kenji",
+    nameJp: "山本 健二",
+    email: "yamamoto@silver.jijp.id",
+    role: "educator_silver",
+    company: "Retired — Toyota Motor Corporation",
+    title: "Senior Industry Mentor",
+  },
+  {
+    id: "u-005",
+    name: "Rina Kusuma",
+    email: "rina@alumni.jijp.id",
+    role: "alumni",
+    company: "Nippon Steel Corporation",
+    title: "Quality Engineer — Osaka Plant",
+  },
+];
+
+export interface JijpCredential {
+  id: string;
+  type: "certificate" | "transcript" | "badge";
+  title: string;
+  titleJp?: string;
+  issuedDate: string;
+  issuedBy: string;
+  status: "valid" | "pending" | "expired";
+  programName: string;
+}
+
+export const JIJP_CREDENTIALS: JijpCredential[] = [
+  {
+    id: "cred-001",
+    type: "certificate",
+    title: "Sertifikat Fondasi Bahasa Jepang",
+    titleJp: "日本語基礎修了証",
+    issuedDate: "2025-03-15",
+    issuedBy: "JIJP Core Authority",
+    status: "valid",
+    programName: "Program Persiapan Industri Jepang 2025",
+  },
+  {
+    id: "cred-002",
+    type: "badge",
+    title: "Badge Kultural Level 1",
+    titleJp: "文化バッジ Lv.1",
+    issuedDate: "2025-04-02",
+    issuedBy: "JIJP Core Authority",
+    status: "valid",
+    programName: "Program Persiapan Industri Jepang 2025",
+  },
+  {
+    id: "cred-003",
+    type: "transcript",
+    title: "Transkrip Program (Draft)",
+    issuedDate: "—",
+    issuedBy: "JIJP Core Authority",
+    status: "pending",
+    programName: "Program Persiapan Industri Jepang 2025",
+  },
+];
+
+export const PLATFORM_STATS = {
+  totalAlumni: 45,
+  placementRate: 85.5,
+  partnerCompanies: 6,
+  avgTimeToPlacement: 4.3,
+  countriesServed: 1,
+  japaneseProvinces: 3,
+};

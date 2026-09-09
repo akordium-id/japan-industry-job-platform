@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+
 import { useAuth } from "@/contexts/AuthContext";
 import { useCalendarEvents, useCourses } from "@/api/hooks";
 import { Card } from "@/components/ui/Card";

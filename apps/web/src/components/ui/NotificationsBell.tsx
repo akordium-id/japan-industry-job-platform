@@ -12,10 +12,12 @@ import {
   Calendar,
   MailOpen,
 } from "lucide-react";
+
+import styles from "./NotificationsBell.module.css";
+
 import { useAuth } from "@/contexts/AuthContext";
 import { useMyNotifications, useMarkNotificationRead } from "@/api/hooks";
 import type { NotificationItem } from "@/api/notifications";
-import styles from "./NotificationsBell.module.css";
 
 export default function NotificationsBell() {
   const { user } = useAuth();

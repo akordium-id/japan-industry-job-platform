@@ -1,4 +1,5 @@
 import type { ApiResponse } from "@jijp/types";
+
 import type { JobApplication } from "./jobs.types";
 
 const BASE = import.meta.env.VITE_API_URL ?? "";

@@ -7,6 +7,7 @@ import {
   TrendingUp,
   Users2,
 } from "lucide-react";
+
 import { useAuth } from "@/contexts/AuthContext";
 import { BRAND_NAME, PLATFORM_STATS } from "@/lib/constants";
 

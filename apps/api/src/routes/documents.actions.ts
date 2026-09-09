@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import path from "node:path";
 
 import { Router, type Request, type Response } from "express";
 
@@ -13,7 +14,6 @@ import {
 } from "../middleware/upload.js";
 import { uploadLimiter } from "../middleware/rateLimit.js";
 import { insert } from "../repositories/documents.repository.js";
-import path from "node:path";
 import { notifyAdminsDocumentSubmitted } from "../services/notifications.service.js";
 
 export const documentsUploadRouter: Router = Router();

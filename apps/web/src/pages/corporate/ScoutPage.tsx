@@ -1,9 +1,10 @@
 import { useState, useMemo, type FormEvent } from "react";
 import { Link } from "react-router-dom";
+import { FileText, UserCheck } from "lucide-react";
+
 import { useJobs, useScoutCandidates } from "@/api/hooks";
 import { jobApi, type ScoutCandidate } from "@/api/jobs";
 import { cvApi } from "@/api/cv";
-import { FileText, UserCheck } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
