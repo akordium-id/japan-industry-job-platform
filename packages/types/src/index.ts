@@ -83,10 +83,7 @@ export interface CandidateProfile {
 // ─── Job Board ───────────────────────────────────────────────
 
 export type ApplicationStatus =
-  | "submitted"
-  | "shortlisted"
-  | "accepted"
-  | "rejected";
+  "submitted" | "shortlisted" | "accepted" | "rejected";
 
 export interface JobPosting {
   id: number;
@@ -101,6 +98,7 @@ export interface JobPosting {
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
+  matchScore?: number;
 }
 
 export interface JobApplication {
@@ -161,10 +159,7 @@ export interface CalendarEvent {
 // ─── Career Timeline (Alumni) ─────────────────────────────────
 
 export type MilestoneType =
-  | "placement"
-  | "promotion"
-  | "contract"
-  | "certification";
+  "placement" | "promotion" | "contract" | "certification";
 
 export interface CareerMilestone {
   id: number;

@@ -75,7 +75,7 @@ export async function findJobs(filters: {
     params.push(`%${filters.specialization}%`, `%${filters.specialization}%`);
   }
   if (filters.minJlpt) {
-    where += " AND jp.min_jlpt = ?";
+    where += ` AND (jp.min_jlpt IS NULL OR jp.min_jlpt = '' OR FIELD(jp.min_jlpt, 'N5', 'N4', 'N3', 'N2', 'N1') <= FIELD(?, 'N5', 'N4', 'N3', 'N2', 'N1'))`;
     params.push(filters.minJlpt);
   }
   if (filters.location) {

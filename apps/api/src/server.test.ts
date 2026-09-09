@@ -4,12 +4,22 @@ import request from "supertest";
 
 import { createServer } from "./server.js";
 
-vi.mock("./db/pool.js", () => ({
-  getPool: () => ({
-    query: vi.fn().mockResolvedValue([{ "1": 1 }]),
-  }),
-  closePool: vi.fn(),
-}));
+vi.mock("./db/pool.js", () => {
+  const mockQuery = vi.fn().mockImplementation((sql: string) => {
+    const lower = sql.toLowerCase();
+    if (lower.includes("count(*)") || lower.includes("count(*)")) {
+      return Promise.resolve([{ total: 0 }]);
+    }
+    return Promise.resolve([[]]);
+  });
+
+  return {
+    getPool: () => ({
+      query: mockQuery,
+    }),
+    closePool: vi.fn(),
+  };
+});
 
 describe("JIJP API (server.ts)", () => {
   it("should respond 200 on root health check", async () => {

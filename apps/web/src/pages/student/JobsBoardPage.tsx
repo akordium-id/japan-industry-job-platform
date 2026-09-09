@@ -12,6 +12,7 @@ export default function JobsBoardPage() {
     minJlpt: "",
     location: "",
   });
+  const [sortByMatch, setSortByMatch] = useState(false);
 
   const [page, setPage] = useState(1);
   const [activeFilter, setActiveFilter] = useState(filter);
@@ -30,6 +31,7 @@ export default function JobsBoardPage() {
     location: activeFilter.location || undefined,
     page,
     limit: 6,
+    sortByMatch,
   });
 
   const jobs = jobsResponse?.jobs ?? [];
@@ -202,12 +204,32 @@ export default function JobsBoardPage() {
             justifyContent: "space-between",
             alignItems: "center",
             marginBottom: "var(--space-3)",
+            flexWrap: "wrap",
+            gap: "var(--space-3)",
           }}
         >
           <h2 style={{ fontSize: "var(--text-xl)" }}>Available positions</h2>
-          <Badge variant="info" size="sm">
-            {jobs.length} jobs
-          </Badge>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--space-2)",
+            }}
+          >
+            <Button
+              variant={sortByMatch ? "primary" : "secondary"}
+              size="sm"
+              onClick={() => {
+                setSortByMatch((v) => !v);
+                setPage(1);
+              }}
+            >
+              {sortByMatch ? "Sorted by match" : "Sort by match"}
+            </Button>
+            <Badge variant="info" size="sm">
+              {jobs.length} jobs
+            </Badge>
+          </div>
         </div>
 
         {loadingJobs ? (
@@ -300,6 +322,20 @@ export default function JobsBoardPage() {
                       flexWrap: "wrap",
                     }}
                   >
+                    {j.matchScore !== undefined && (
+                      <Badge
+                        variant={
+                          j.matchScore >= 75
+                            ? "success"
+                            : j.matchScore >= 50
+                              ? "warning"
+                              : "default"
+                        }
+                        size="sm"
+                      >
+                        Match {j.matchScore}%
+                      </Badge>
+                    )}
                     {j.min_jlpt && (
                       <Badge variant="accent" size="sm">
                         JLPT ≥ {j.min_jlpt}

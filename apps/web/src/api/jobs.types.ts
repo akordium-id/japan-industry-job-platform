@@ -24,6 +24,7 @@ export interface Job {
   salary_range?: string;
   is_active: 0 | 1;
   created_at: string;
+  matchScore?: number;
 }
 
 export interface JobApplication {

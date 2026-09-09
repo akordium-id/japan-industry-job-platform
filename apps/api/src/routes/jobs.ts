@@ -17,6 +17,7 @@ import { ok, paginated } from "../lib/response.js";
 import { notifyUser } from "../services/notifications.service.js";
 import { findScoutCandidates } from "../repositories/users.repository.js";
 import { toUserDto } from "../lib/userMapping.js";
+import { calculateMatchScore } from "../lib/matching.js";
 
 export const jobsRouter: Router = Router();
 
@@ -33,16 +34,61 @@ jobsRouter.get("/", async (req: Request, res: Response) => {
   const limit = req.query.limit
     ? Math.min(100, Math.max(1, Number(req.query.limit)))
     : undefined;
+  const sortByMatch =
+    typeof req.query.sortByMatch === "string"
+      ? req.query.sortByMatch === "true" || req.query.sortByMatch === "1"
+      : false;
 
   const { rows, total } = await findJobs({ specialization, minJlpt, location });
 
+  let currentUserProfile: {
+    jlpt_level?: string | null;
+    specialization?: string | null;
+    origin_city?: string | null;
+  } | null = null;
+  if (req.session && req.session.user && req.session.user.id) {
+    const { findById: findUserById } =
+      await import("../repositories/users.repository.js");
+    const user = await findUserById(req.session.user.id);
+    if (user && user.role === "student") {
+      currentUserProfile = {
+        jlpt_level: user.jlpt_level,
+        specialization: user.specialization,
+        origin_city: user.origin_city,
+      };
+    }
+  }
+
+  const enrichedJobs = rows.map((job) => {
+    let matchScore: number | undefined;
+    if (currentUserProfile) {
+      matchScore = calculateMatchScore({
+        candidateJlpt: currentUserProfile.jlpt_level,
+        candidateSpecialization: currentUserProfile.specialization,
+        candidateCity: currentUserProfile.origin_city,
+        jobMinJlpt: job.min_jlpt,
+        jobSpecialization: [job.title, job.specialization, job.requirements]
+          .filter(Boolean)
+          .join(" "),
+        jobLocation: job.location,
+      });
+    }
+    return { ...job, matchScore };
+  });
+
+  if (sortByMatch && currentUserProfile) {
+    enrichedJobs.sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0));
+  }
+
   if (page && limit) {
     const offset = (page - 1) * limit;
-    res.json(paginated(rows.slice(offset, offset + limit), page, limit, total));
+    res.json(
+      paginated(enrichedJobs.slice(offset, offset + limit), page, limit, total),
+    );
     return;
   }
 
-  res.json(paginated(rows, 1, rows.length || 1, total));
+  res.json(paginated(enrichedJobs, 1, enrichedJobs.length || 1, total));
 });
 
 jobsRouter.post("/", requireAuth, async (req: Request, res: Response) => {

@@ -89,6 +89,7 @@ export const jobApi = {
       location?: string;
       page?: number;
       limit?: number;
+      sortByMatch?: boolean;
     } = {},
   ) => {
     const params = new URLSearchParams();
@@ -97,6 +98,7 @@ export const jobApi = {
     if (p.location) params.set("location", p.location);
     if (p.page) params.set("page", String(p.page));
     if (p.limit) params.set("limit", String(p.limit));
+    if (p.sortByMatch) params.set("sortByMatch", "true");
     const qs = params.toString();
     return fetchJson<JobsResponse>(`/api/jobs${qs ? `?${qs}` : ""}`);
   },
