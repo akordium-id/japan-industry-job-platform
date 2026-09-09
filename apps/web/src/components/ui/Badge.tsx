@@ -9,33 +9,44 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-[var(--color-surface-2)] text-[var(--color-text-secondary)] border-[var(--color-border)]",
+          "bg-slate-100 text-slate-700 border-slate-200",
         success:
-          "bg-[var(--color-success-soft)] text-[var(--color-success)] border-[var(--color-success)]/30",
+          "bg-emerald-50 text-emerald-700 border-emerald-200/80",
         warning:
-          "bg-[var(--color-warning-soft)] text-[var(--color-warning)] border-[var(--color-warning)]/30",
+          "bg-amber-50 text-amber-700 border-amber-200/80",
         danger:
-          "bg-[var(--color-error-soft)] text-[var(--color-error)] border-[var(--color-error)]/30",
+          "bg-rose-50 text-rose-700 border-rose-200/80",
         info:
-          "bg-[var(--color-info-soft)] text-[var(--color-info)] border-[var(--color-info)]/30",
+          "bg-sky-50 text-sky-700 border-sky-200/80",
         accent:
-          "bg-[var(--color-accent-soft)] text-[var(--color-accent)] border-[var(--color-accent)]/30",
+          "bg-red-50 text-red-700 border-red-200/80",
         student:
-          "bg-[#ebf5fb] text-[#2980b9] border-[#3498db]/30 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-800",
+          "bg-blue-50 text-blue-700 border-blue-200/80",
         corporate:
-          "bg-[#f4ecf7] text-[#8e44ad] border-[#8e44ad]/30 dark:bg-purple-950/40 dark:text-purple-400 dark:border-purple-800",
+          "bg-purple-50 text-purple-700 border-purple-200/80",
         educator:
-          "bg-[#e8f8f5] text-[#16a085] border-[#16a085]/30 dark:bg-teal-950/40 dark:text-teal-400 dark:border-teal-800",
+          "bg-teal-50 text-teal-700 border-teal-200/80",
         silver:
-          "bg-[#fef9e7] text-[#b7950b] border-[#d4ac0d]/30 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-800",
+          "bg-amber-50 text-amber-800 border-amber-200/80",
         alumni:
-          "bg-[#f1f5f9] text-[#475569] border-[#94a3b8]/30 dark:bg-slate-900/40 dark:text-slate-400 dark:border-slate-800",
+          "bg-slate-100 text-slate-700 border-slate-200/80",
         admin:
-          "bg-red-50 text-[var(--color-accent)] border-[var(--color-accent)]/30 dark:bg-red-950/40 dark:text-red-400 dark:border-red-800",
+          "bg-rose-50 text-rose-700 border-rose-200/80",
+        "jlpt-n1":
+          "bg-amber-100 text-amber-900 border-amber-300 font-bold tracking-wide",
+        "jlpt-n2":
+          "bg-sky-100 text-sky-900 border-sky-300 font-bold tracking-wide",
+        "jlpt-n3":
+          "bg-emerald-100 text-emerald-900 border-emerald-300 font-bold tracking-wide",
+        "jlpt-n4":
+          "bg-slate-100 text-slate-700 border-slate-300 font-medium",
+        "jlpt-n5":
+          "bg-slate-50 text-slate-600 border-slate-200 font-medium",
       },
       size: {
         sm: "text-[11px] px-2 py-0.5",
         md: "text-xs px-2.5 py-1",
+        lg: "text-sm px-3 py-1.5",
       },
     },
     defaultVariants: {

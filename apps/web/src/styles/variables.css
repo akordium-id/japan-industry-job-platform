@@ -1,42 +1,58 @@
 :root {
-  --color-bg: #f8f9fa;
+  --color-bg: #f8fafc;
   --color-surface: #ffffff;
-  --color-surface-2: #f1f3f5;
-  --color-surface-3: #e9ecef;
+  --color-surface-2: #f1f5f9;
+  --color-surface-3: #e2e8f0;
   --color-border: #e2e8f0;
-  --color-border-soft: #f1f5f9;
+  --color-border-soft: #f8fafc;
 
-  --color-text-primary: #1f2937;
-  --color-text-secondary: #4b5563;
-  --color-text-tertiary: #9ca3af;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #94a3b8;
   --color-text-inverse: #ffffff;
 
-  --color-accent: #d32f2f;
-  --color-accent-hover: #b71c1c;
-  --color-accent-soft: rgba(211, 47, 47, 0.13);
-  --color-accent-muted: #9a0007;
+  /* Accent: Shu-iro (Japanese Vermilion / Hanko Seal) */
+  --color-accent: #dc2626;
+  --color-accent-hover: #b91c1c;
+  --color-accent-soft: rgba(220, 38, 38, 0.08);
+  --color-accent-muted: #991b1b;
 
-  --color-primary: #0f2c59;
-  --color-primary-hover: #0b1e3d;
-  --color-primary-soft: rgba(15, 44, 89, 0.13);
+  /* Primary: Aizome (Deep Japanese Indigo) */
+  --color-primary: #0f172a;
+  --color-primary-hover: #020617;
+  --color-primary-soft: rgba(15, 23, 42, 0.08);
 
-  --color-success: #27ae60;
-  --color-success-soft: rgba(39, 174, 96, 0.13);
-  --color-warning: #e67e22;
-  --color-warning-soft: rgba(230, 126, 34, 0.13);
-  --color-info: #2980b9;
-  --color-info-soft: rgba(41, 128, 185, 0.13);
-  --color-error: #e74c3c;
-  --color-error-soft: rgba(231, 76, 60, 0.13);
+  /* Semantic status tokens */
+  --color-success: #059669;
+  --color-success-soft: rgba(5, 150, 105, 0.1);
+  --color-warning: #d97706;
+  --color-warning-soft: rgba(217, 119, 6, 0.1);
+  --color-info: #0284c7;
+  --color-info-soft: rgba(2, 132, 199, 0.1);
+  --color-error: #e11d48;
+  --color-error-soft: rgba(225, 29, 72, 0.1);
 
-  --color-role-student: #3498db;
-  --color-role-corporate: #8e44ad;
-  --color-role-educator: #16a085;
-  --color-role-silver: #d4ac0d;
+  /* Role Identifiers */
+  --color-role-student: #2563eb;
+  --color-role-corporate: #7c3aed;
+  --color-role-educator: #0d9488;
+  --color-role-silver: #b45309;
+
+  /* JLPT Color Standards */
+  --color-jlpt-n1: #b45309;
+  --color-jlpt-n1-bg: #fef3c7;
+  --color-jlpt-n2: #0284c7;
+  --color-jlpt-n2-bg: #e0f2fe;
+  --color-jlpt-n3: #059669;
+  --color-jlpt-n3-bg: #d1fae5;
+  --color-jlpt-n4: #475569;
+  --color-jlpt-n4-bg: #f1f5f9;
+  --color-jlpt-n5: #64748b;
+  --color-jlpt-n5-bg: #f8fafc;
 
   --font-primary:
-    "Outfit Variable", "Raleway Variable", "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Courier New", monospace;
+    "Outfit Variable", "Raleway Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -70,35 +86,34 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
-  --radius-sm: 3px;
-  --radius: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-md:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg:
-    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-accent: 0 0 20px rgba(211, 47, 47, 0.2);
+  --shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-accent: 0 4px 14px 0 rgba(220, 38, 38, 0.2);
 
-  --transition-fast: 150ms ease-out;
-  --transition: 200ms ease-out;
-  --transition-slow: 350ms ease-out;
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  --sidebar-width: 240px;
-  --navbar-height: 52px;
-  --container-px: var(--space-4);
-  --content-max-width: 1280px;
+  --sidebar-width: 256px;
+  --sidebar-collapsed-width: 72px;
+  --navbar-height: 56px;
+  --container-px: var(--space-6);
+  --content-max-width: 1360px;
 
   --z-dropdown: 100;
   --z-modal: 200;
   --z-toast: 300;
-  --z-navbar: 50;
+  --z-navbar: 40;
   --z-mobile-nav: 150;
 }
 
