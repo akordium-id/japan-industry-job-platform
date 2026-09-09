@@ -31,35 +31,130 @@ interface NavItem {
 
 const ROLE_NAV: Record<AppRole, NavItem[]> = {
   student: [
-    { to: "/student", label: "Pathway Dashboard", labelJp: "ダッシュボード", icon: Compass },
-    { to: "/student/courses", label: "Learning Track", labelJp: "カリキュラム", icon: BookOpen },
-    { to: "/student/vault", label: "Document Vault", labelJp: "書類管理", icon: FolderLock },
-    { to: "/student/cv", label: "Japanese Rirekisho", labelJp: "履歴書作成", icon: FileText },
-    { to: "/student/jobs", label: "Jobs & Matching", labelJp: "求人一覧", icon: Briefcase },
-    { to: "/student/calendar", label: "Class & Sessions", labelJp: "日程表", icon: Calendar },
-    { to: "/career", label: "Career Timeline", labelJp: "キャリア軌跡", icon: TrendingUp },
+    {
+      to: "/student",
+      label: "Pathway Dashboard",
+      labelJp: "ダッシュボード",
+      icon: Compass,
+    },
+    {
+      to: "/student/courses",
+      label: "Learning Track",
+      labelJp: "カリキュラム",
+      icon: BookOpen,
+    },
+    {
+      to: "/student/vault",
+      label: "Document Vault",
+      labelJp: "書類管理",
+      icon: FolderLock,
+    },
+    {
+      to: "/student/cv",
+      label: "Japanese Rirekisho",
+      labelJp: "履歴書作成",
+      icon: FileText,
+    },
+    {
+      to: "/student/jobs",
+      label: "Jobs & Matching",
+      labelJp: "求人一覧",
+      icon: Briefcase,
+    },
+    {
+      to: "/student/calendar",
+      label: "Class & Sessions",
+      labelJp: "日程表",
+      icon: Calendar,
+    },
+    {
+      to: "/career",
+      label: "Career Timeline",
+      labelJp: "キャリア軌跡",
+      icon: TrendingUp,
+    },
   ],
   corporate: [
-    { to: "/corporate", label: "Recruitment Portal", labelJp: "採用ポータル", icon: Building2 },
-    { to: "/corporate/jobs", label: "Manage Job Openings", labelJp: "求人管理", icon: Briefcase },
-    { to: "/corporate/scout", label: "Scout Talents", labelJp: "スカウト検索", icon: Search },
+    {
+      to: "/corporate",
+      label: "Recruitment Portal",
+      labelJp: "採用ポータル",
+      icon: Building2,
+    },
+    {
+      to: "/corporate/jobs",
+      label: "Manage Job Openings",
+      labelJp: "求人管理",
+      icon: Briefcase,
+    },
+    {
+      to: "/corporate/scout",
+      label: "Scout Talents",
+      labelJp: "スカウト検索",
+      icon: Search,
+    },
   ],
   educator_bilingual: [
-    { to: "/educator", label: "Educator Portal", labelJp: "教育ポータル", icon: Users },
-    { to: "/student/calendar", label: "Training Calendar", labelJp: "授業日程", icon: Calendar },
+    {
+      to: "/educator",
+      label: "Educator Portal",
+      labelJp: "教育ポータル",
+      icon: Users,
+    },
+    {
+      to: "/student/calendar",
+      label: "Training Calendar",
+      labelJp: "授業日程",
+      icon: Calendar,
+    },
   ],
   educator_silver: [
-    { to: "/educator", label: "Senior Mentor Portal", labelJp: "メンターポータル", icon: Users },
-    { to: "/student/calendar", label: "Training Calendar", labelJp: "面談日程", icon: Calendar },
+    {
+      to: "/educator",
+      label: "Senior Mentor Portal",
+      labelJp: "メンターポータル",
+      icon: Users,
+    },
+    {
+      to: "/student/calendar",
+      label: "Training Calendar",
+      labelJp: "面談日程",
+      icon: Calendar,
+    },
   ],
   alumni: [
-    { to: "/career", label: "Career Timeline", labelJp: "キャリア軌跡", icon: TrendingUp },
-    { to: "/student/profile", label: "My Profile", labelJp: "会員情報", icon: User },
-    { to: "/student/jobs", label: "Career Opportunities", labelJp: "転職機会", icon: Briefcase },
+    {
+      to: "/career",
+      label: "Career Timeline",
+      labelJp: "キャリア軌跡",
+      icon: TrendingUp,
+    },
+    {
+      to: "/student/profile",
+      label: "My Profile",
+      labelJp: "会員情報",
+      icon: User,
+    },
+    {
+      to: "/student/jobs",
+      label: "Career Opportunities",
+      labelJp: "転職機会",
+      icon: Briefcase,
+    },
   ],
   admin: [
-    { to: "/admin/verifications", label: "Document Verification", labelJp: "書類審査", icon: ShieldCheck },
-    { to: "/corporate/jobs", label: "Manage Jobs", labelJp: "求人管理", icon: Briefcase },
+    {
+      to: "/admin/verifications",
+      label: "Document Verification",
+      labelJp: "書類審査",
+      icon: ShieldCheck,
+    },
+    {
+      to: "/corporate/jobs",
+      label: "Manage Jobs",
+      labelJp: "求人管理",
+      icon: Briefcase,
+    },
   ],
 };
 
@@ -114,7 +209,11 @@ export function Sidebar() {
             <NavLink
               key={item.to}
               to={item.to}
-              end={item.to === "/student" || item.to === "/corporate" || item.to === "/educator"}
+              end={
+                item.to === "/student" ||
+                item.to === "/corporate" ||
+                item.to === "/educator"
+              }
               className={({ isActive }) =>
                 cn(
                   "relative flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 group",

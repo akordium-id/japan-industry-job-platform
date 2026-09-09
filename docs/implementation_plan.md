@@ -53,11 +53,13 @@ japan-industry-job-platform/
 ### Phase 1 — Workspace Root Setup
 
 #### [NEW] `package.json` (root)
+
 - `private: true`, `engines: { node: ">=20" }`
 - Scripts: `dev`, `build`, `lint`, `test`, `typecheck`
 - DevDeps: `turbo`, `typescript`, `prettier`
 
 #### [NEW] `pnpm-workspace.yaml`
+
 ```yaml
 packages:
   - "apps/*"
@@ -66,12 +68,15 @@ packages:
 ```
 
 #### [NEW] `turbo.json`
+
 Pipeline tasks:
+
 - `build` → dependsOn `^build` (packages dulu, baru apps)
 - `dev` → parallel, dengan env passthrough
 - `lint`, `typecheck`, `test` → independent per package
 
 #### [NEW] `.npmrc`
+
 - `strict-peer-dependencies=false`
 - `shamefully-hoist=false`
 
@@ -80,11 +85,13 @@ Pipeline tasks:
 ### Phase 2 — Tooling Packages
 
 #### [NEW] `tooling/typescript/`
+
 - `base.json` — strict TS config base
 - `nextjs.json` — kalau nanti ada Next.js app
 - `node.json` — untuk Express backend
 
 #### [NEW] `tooling/eslint/`
+
 - `index.js` — ESLint v9 flat config base (shared antara FE dan BE)
 - Preset: `@typescript-eslint`, `eslint-plugin-import`
 
@@ -93,33 +100,48 @@ Pipeline tasks:
 ### Phase 3 — Shared Packages
 
 #### [NEW] `packages/types/`
+
 Shared TypeScript types yang dipakai FE dan BE:
 
 ```typescript
 // packages/types/src/index.ts
-export type UserRole = 'student' | 'alumni' | 'corporate' | 'educator_bilingual' | 'educator_silver' | 'admin'
-export type DocumentStatus = 'pending' | 'approved' | 'rejected'
-export type ApplicationStatus = 'submitted' | 'shortlisted' | 'accepted' | 'rejected'
-export type NotificationType = 'document_submitted' | 'document_approved' | 'document_rejected' | 'application_submitted' | 'application_decided' | 'scout_received'
-export type JLPTLevel = 'N1' | 'N2' | 'N3' | 'N4' | 'N5'
+export type UserRole =
+  | "student"
+  | "alumni"
+  | "corporate"
+  | "educator_bilingual"
+  | "educator_silver"
+  | "admin";
+export type DocumentStatus = "pending" | "approved" | "rejected";
+export type ApplicationStatus =
+  "submitted" | "shortlisted" | "accepted" | "rejected";
+export type NotificationType =
+  | "document_submitted"
+  | "document_approved"
+  | "document_rejected"
+  | "application_submitted"
+  | "application_decided"
+  | "scout_received";
+export type JLPTLevel = "N1" | "N2" | "N3" | "N4" | "N5";
 
 export interface ApiResponse<T> {
-  success: boolean
-  data: T
-  message?: string
+  success: boolean;
+  data: T;
+  message?: string;
 }
 
 export interface PaginatedResponse<T> extends ApiResponse<T[]> {
   pagination: {
-    page: number
-    limit: number
-    total: number
-    totalPages: number
-  }
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
 }
 ```
 
 #### [NEW] `packages/validators/`
+
 Shared Zod schemas — ini **key benefit** monorepo: schema sekali tulis, dipakai di FE (form validation) dan BE (request validation):
 
 ```typescript
@@ -127,14 +149,14 @@ Shared Zod schemas — ini **key benefit** monorepo: schema sekali tulis, dipaka
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
-})
+});
 
 // packages/validators/src/candidate.ts
 export const candidateProfileSchema = z.object({
   nameJapanese: z.string().optional(),
-  jlptLevel: z.enum(['N1', 'N2', 'N3', 'N4', 'N5']).optional(),
+  jlptLevel: z.enum(["N1", "N2", "N3", "N4", "N5"]).optional(),
   // ...
-})
+});
 ```
 
 ---
@@ -142,6 +164,7 @@ export const candidateProfileSchema = z.object({
 ### Phase 4 — Migrate Apps
 
 #### [MOVE] `apps/web/` (Frontend)
+
 - Copy isi folder `frontend/` JIJP yang lama ke sini
 - Update `package.json` untuk pakai packages lokal: `@jijp/types`, `@jijp/validators`
 - Update `tsconfig.json` extend dari `@jijp/typescript/base`
@@ -149,6 +172,7 @@ export const candidateProfileSchema = z.object({
 - Update import paths
 
 #### [MOVE] `apps/api/` (Backend Express)
+
 - Copy isi folder `backend/` JIJP yang lama ke sini
 - Update `package.json` untuk pakai `@jijp/types`, `@jijp/validators`
 - **Wajib lakukan (dari analisis):**
@@ -163,6 +187,7 @@ export const candidateProfileSchema = z.object({
 ### Phase 5 — Docker & Dev Environment
 
 #### [NEW] `docker-compose.yml` (Development)
+
 ```yaml
 services:
   mysql:
@@ -186,10 +211,12 @@ services:
 ```
 
 #### [NEW] `docker/Dockerfile.api` (Production)
+
 - Multi-stage: `node:20-alpine` build → slim runtime
 - `pnpm deploy --filter=@jijp/api` untuk isolate deps
 
 #### [NEW] `docker/Dockerfile.web` (Production)
+
 - Build static: `pnpm build --filter=@jijp/web`
 - Serve via Nginx
 
@@ -198,6 +225,7 @@ services:
 ### Phase 6 — CI/CD
 
 #### [NEW] `.github/workflows/ci.yml`
+
 ```yaml
 # Turborepo-aware CI:
 # - Cache turbo build artifacts
@@ -215,13 +243,13 @@ jobs:
 
 Package scope yang disarankan: `@jijp/*` (atau ganti dengan brand name setelah keputusan rebrand).
 
-| Package | Name |
-|---|---|
-| Frontend app | `@jijp/web` |
-| Backend app | `@jijp/api` |
-| Shared types | `@jijp/types` |
-| Shared validators | `@jijp/validators` |
-| ESLint config | `@jijp/eslint-config` |
+| Package           | Name                      |
+| ----------------- | ------------------------- |
+| Frontend app      | `@jijp/web`               |
+| Backend app       | `@jijp/api`               |
+| Shared types      | `@jijp/types`             |
+| Shared validators | `@jijp/validators`        |
+| ESLint config     | `@jijp/eslint-config`     |
 | TypeScript config | `@jijp/typescript-config` |
 
 ---
@@ -229,6 +257,7 @@ Package scope yang disarankan: `@jijp/*` (atau ganti dengan brand name setelah k
 ## Verification Plan
 
 ### Automated Tests
+
 ```bash
 # Dari root — test semua apps sekaligus
 pnpm turbo test
@@ -239,6 +268,7 @@ pnpm --filter @jijp/api test
 ```
 
 ### Manual Verification
+
 1. `pnpm dev` dari root → FE dan BE jalan bersamaan
 2. `docker compose up` → semua service naik (MySQL + API + Web)
 3. Build production: `pnpm turbo build` → tidak ada error
@@ -248,14 +278,14 @@ pnpm --filter @jijp/api test
 
 ## Estimasi Effort
 
-| Phase | Task | Estimasi |
-|---|---|---|
-| 1 | Workspace root setup | 1 jam |
-| 2 | Tooling packages | 1 jam |
-| 3 | Shared types + validators | 2–3 jam |
-| 4 | Migrate + cleanup apps | 3–4 jam |
-| 5 | Docker dev + prod | 1–2 jam |
-| 6 | CI/CD | 1 jam |
-| **Total** | | **~10–12 jam** |
+| Phase     | Task                      | Estimasi       |
+| --------- | ------------------------- | -------------- |
+| 1         | Workspace root setup      | 1 jam          |
+| 2         | Tooling packages          | 1 jam          |
+| 3         | Shared types + validators | 2–3 jam        |
+| 4         | Migrate + cleanup apps    | 3–4 jam        |
+| 5         | Docker dev + prod         | 1–2 jam        |
+| 6         | CI/CD                     | 1 jam          |
+| **Total** |                           | **~10–12 jam** |
 
 > Kalau sumber kode JIJP belum ada (perlu clone dulu), tambah 1–2 jam untuk setup subtree/copy.

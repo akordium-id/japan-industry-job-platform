@@ -22,9 +22,12 @@ interface PathwayMilestoneRoadmapProps {
   status: PathwayStatus;
 }
 
-export function PathwayMilestoneRoadmap({ status }: PathwayMilestoneRoadmapProps) {
+export function PathwayMilestoneRoadmap({
+  status,
+}: PathwayMilestoneRoadmapProps) {
   // Determine each stage's status
-  const stage1Complete = status.hasUploadedDocs && status.completedCoursesCount > 0;
+  const stage1Complete =
+    status.hasUploadedDocs && status.completedCoursesCount > 0;
   const stage1Active = !stage1Complete;
 
   const stage2Complete = status.isVerified && status.hasCv;
@@ -41,7 +44,11 @@ export function PathwayMilestoneRoadmap({ status }: PathwayMilestoneRoadmapProps
       title: "Fondasi & Berkas",
       titleJp: "基礎学習 & 書類提出",
       icon: BookOpen,
-      status: stage1Complete ? "completed" : stage1Active ? "active" : "pending",
+      status: stage1Complete
+        ? "completed"
+        : stage1Active
+          ? "active"
+          : "pending",
       desc: "Unggah KTP, sertifikat JLPT, dan mulai modul kurikulum bahasa Jepang.",
       meta: `${status.completedCoursesCount > 0 ? "Modul Aktif" : "Belum Mulai"} • ${status.hasUploadedDocs ? "Berkas Terunggah" : "Berkas Kosong"}`,
       linkTo: "/student/vault",
@@ -52,7 +59,11 @@ export function PathwayMilestoneRoadmap({ status }: PathwayMilestoneRoadmapProps
       title: "Verifikasi & Rirekisho",
       titleJp: "書類審査 & 履歴書完成",
       icon: FileCheck,
-      status: stage2Complete ? "completed" : stage2Active ? "active" : "pending",
+      status: stage2Complete
+        ? "completed"
+        : stage2Active
+          ? "active"
+          : "pending",
       desc: "Verifikasi profil oleh admin dan otomatisasi CV berstandar industri Jepang (JIS PDF).",
       meta: `${status.isVerified ? "Terverifikasi ✓" : "Verifikasi Pending"} • ${status.hasCv ? "CV Siap" : "CV Belum Lengkap"}`,
       linkTo: "/student/cv",
@@ -63,7 +74,11 @@ export function PathwayMilestoneRoadmap({ status }: PathwayMilestoneRoadmapProps
       title: "Matching & Wawancara",
       titleJp: "求人応募 & 企業面接",
       icon: Briefcase,
-      status: stage3Complete ? "completed" : stage3Active ? "active" : "pending",
+      status: stage3Complete
+        ? "completed"
+        : stage3Active
+          ? "active"
+          : "pending",
       desc: "Melamar ke mitra industri Jepang aktif dan menerima undangan scout dari HR Jepang.",
       meta: `${status.appliedJobsCount} Lamaran Terkirim`,
       linkTo: "/student/jobs",
@@ -89,10 +104,13 @@ export function PathwayMilestoneRoadmap({ status }: PathwayMilestoneRoadmapProps
         <div>
           <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
             <span>The Pathway to Japan</span>
-            <span className="text-xs font-normal text-slate-400">/ 日本就職ロードマップ</span>
+            <span className="text-xs font-normal text-slate-400">
+              / 日本就職ロードマップ
+            </span>
           </h2>
           <p className="text-xs text-slate-500 mt-0.5">
-            Jalur tahapan terstandar menuju penempatan karier profesional di Jepang.
+            Jalur tahapan terstandar menuju penempatan karier profesional di
+            Jepang.
           </p>
         </div>
       </div>

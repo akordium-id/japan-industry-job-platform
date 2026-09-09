@@ -21,7 +21,8 @@ const avatarVariants = cva(
         educator: "bg-[#e8f8f5] text-[#16a085] border-[#16a085]/40",
         silver: "bg-[#fef9e7] text-[#b7950b] border-[#d4ac0d]/40",
         alumni: "bg-[#f1f5f9] text-[#475569] border-[#94a3b8]/40",
-        admin: "bg-red-50 text-[var(--color-accent)] border-[var(--color-accent)]/40",
+        admin:
+          "bg-red-50 text-[var(--color-accent)] border-[var(--color-accent)]/40",
       },
     },
     defaultVariants: {
@@ -40,18 +41,12 @@ function getInitials(name: string) {
 }
 
 type AppRoleVariant =
-  | "student"
-  | "corporate"
-  | "educator"
-  | "silver"
-  | "alumni"
-  | "admin";
+  "student" | "corporate" | "educator" | "silver" | "alumni" | "admin";
 
-export interface AvatarProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>,
-    "role"
-  > {
+export interface AvatarProps extends Omit<
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>,
+  "role"
+> {
   name?: string;
   src?: string;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
@@ -70,7 +65,8 @@ const Avatar = React.forwardRef<
         ref={ref}
         className={cn(
           avatarVariants({ size, role: roleVariant }),
-          !roleVariant && "bg-[var(--color-surface-2)] text-[var(--color-text-secondary)]",
+          !roleVariant &&
+            "bg-[var(--color-surface-2)] text-[var(--color-text-secondary)]",
           className,
         )}
         {...props}
@@ -94,7 +90,8 @@ const Avatar = React.forwardRef<
       ref={ref}
       className={cn(
         avatarVariants({ size, role: roleVariant }),
-        !roleVariant && "bg-[var(--color-surface-2)] text-[var(--color-text-secondary)]",
+        !roleVariant &&
+          "bg-[var(--color-surface-2)] text-[var(--color-text-secondary)]",
         className,
       )}
       {...props}

@@ -6,20 +6,21 @@
 
 ### Codebase Snapshot
 
-| Komponen | Detail |
-|---|---|
-| **Frontend** | React 19 + TypeScript + Vite, React Router v7, TanStack Query v5, React Hook Form + Zod, Tailwind CSS v4, shadcn/ui tokens |
-| **Backend** | Node.js + Express.js, MySQL 8 + mysql2, Session-based auth, Multer (file upload), PDFKit (CV generation), Nodemailer |
-| **Arsitektur** | Feature-based modular: Controller → Service → Repository (thin controller pattern) |
-| **Testing** | Vitest + React Testing Library + Playwright E2E |
-| **Deployment** | Docker + Nginx, cPanel Passenger support, Coolify-ready |
-| **Lokasi deploy** | `https://isense-technology.com/jijp` |
+| Komponen          | Detail                                                                                                                     |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **Frontend**      | React 19 + TypeScript + Vite, React Router v7, TanStack Query v5, React Hook Form + Zod, Tailwind CSS v4, shadcn/ui tokens |
+| **Backend**       | Node.js + Express.js, MySQL 8 + mysql2, Session-based auth, Multer (file upload), PDFKit (CV generation), Nodemailer       |
+| **Arsitektur**    | Feature-based modular: Controller → Service → Repository (thin controller pattern)                                         |
+| **Testing**       | Vitest + React Testing Library + Playwright E2E                                                                            |
+| **Deployment**    | Docker + Nginx, cPanel Passenger support, Coolify-ready                                                                    |
+| **Lokasi deploy** | `https://isense-technology.com/jijp`                                                                                       |
 
 ---
 
 ## 2. Peta Fitur Lengkap
 
 ### 🔐 Auth & Akses
+
 - Register / Login lokal (bcrypt + express-session)
 - **SSO ICE Center ITB** (JWT RS256 + auto-provisioning user)
 - 6 Role: `student`, `alumni`, `corporate`, `educator_bilingual`, `educator_silver`, `admin`
@@ -27,6 +28,7 @@
 - Rate limiting: global (100 req/min), auth (15 req/min), upload (20/15 menit), CV (10 req/min)
 
 ### 👤 Profil Kandidat (Student)
+
 - Edit nama Jepang (Kanji), tanggal lahir, kota asal, telepon
 - Level JLPT (N5–N1), spesialisasi teknis (multi-value)
 - Riwayat pendidikan (degree, institusi, tahun)
@@ -34,12 +36,14 @@
 - Skills list + Bio (Indonesia & Jepang)
 
 ### 📅 Kalender & Kursus (Learning Track)
+
 - Kalender jadwal kelas dengan tipe event & visibility berbasis role
 - Kurikulum 4 fase berjenjang (Bahasa Jepang → Bisnis Jepang → Negosiasi → Sertifikasi)
 - Progress tracking per course (enrollment → in_progress → completed)
 - Subtopik dengan durasi menit dan label bilingual (ID + JP)
 
 ### 📂 Document Vault
+
 - Upload dokumen: KTP, Sertifikat, Portfolio, Transkrip (max 10MB, format: JPG/PNG/WebP/PDF)
 - Secure file serving (path traversal protection, auth gate)
 - Status per dokumen: `pending` → `approved` / `rejected`
@@ -47,6 +51,7 @@
 - Notifikasi ke admin saat dokumen di-submit
 
 ### 📄 CV Generator (Rirekisho / 履歴書)
+
 - Generate PDF CV standar Jepang secara otomatis dari data profil
 - Embed font **Noto Sans CJK JP** (render karakter Kanji/Hiragana di PDF)
 - Cek kelengkapan profil sebelum generate
@@ -54,6 +59,7 @@
 - Endpoint: `GET /api/cv/export` dan `GET /api/cv/export/:candidateId`
 
 ### 💼 Job Board & Matching (Two-Way)
+
 - **Apply** (dari sisi kandidat): browse job, filter by specialization/JLPT/lokasi, apply + notifikasi perusahaan
 - **Scout** (dari sisi corporate): cari kandidat terverifikasi, kirim undangan wawancara
 - Pagination di job listing
@@ -61,33 +67,39 @@
 - Notifikasi kandidat via email (SMTP) + in-app saat status lamaran berubah
 
 ### 🏢 Corporate Dashboard
+
 - Lihat kandidat scout-able (filter JLPT & spesialisasi)
 - Buat & kelola lowongan (CRUD job posting + company management)
 - Request interview modal dengan form job selection + pesan
 - Download CV kandidat terverifikasi
 
 ### 👨‍🏫 Educator Portal
+
 - Lihat data siswa terkait (role: `educator_bilingual`, `educator_silver`)
 - Akses ke kalender kelas
 
 ### 🛡️ Admin Panel
+
 - Dashboard verifikasi dokumen (pending queue)
 - Approve / Reject individual + batch action
 - Stats: total student, pending/approved docs, active jobs, total applications
 - Notifikasi ke kandidat via email saat verifikasi selesai
 
 ### 📊 Career Timeline (Alumni)
+
 - Timeline visual milestone karir pasca-penempatan (placement, promosi, kontrak, sertifikasi)
 - Proactive AI recommendations ("Saatnya negosiasi kontrak") dengan dismiss/restore
 - Modal booking konsultasi karir
 - Career stats & industry benchmark (vs. rata-rata alumni)
 
 ### 🔔 Notifikasi In-App
+
 - Bell icon dengan unread count di navbar
 - Notifikasi templates: `document_submitted`, `document_approved`, `document_rejected`, `application_submitted`, `application_decided`, `scout_received`
 - Multi-channel: In-App + Email SMTP + Webhook (HMAC-signed)
 
 ### 🛠️ Infrastruktur Teknis
+
 - Helmet + CORS + Express Rate Limit (security)
 - Soft delete pattern (`deleted_at`, `deleted_by`) di semua entitas utama
 - Sanitize `deleted_at`/`deleted_by` dari semua response JSON
@@ -100,14 +112,14 @@
 
 ## 3. Kekuatan Kode yang Layak Di-highlight ke Klien
 
-| Aspek | Detail |
-|---|---|
-| **TypeScript strict** | Zero `any`, semua inferret dari Zod schema |
-| **Clean Architecture** | Thin controller, service layer, repository — sesuai best practice enterprise |
-| **Security layers** | Helmet, CORS whitelist, rate limit per endpoint type, path traversal check, HMAC webhook |
-| **Developer experience** | OpenAPI auto-generated, E2E test Playwright, unit test Vitest |
-| **Bilingual UX** | Semua konten punya label Bahasa Indonesia + Jepang (aksara Kanji/Hiragana) |
-| **PDF engine custom** | PDFKit + custom font CJK → generate dokumen resmi Jepang dari browser |
+| Aspek                    | Detail                                                                                   |
+| ------------------------ | ---------------------------------------------------------------------------------------- |
+| **TypeScript strict**    | Zero `any`, semua inferret dari Zod schema                                               |
+| **Clean Architecture**   | Thin controller, service layer, repository — sesuai best practice enterprise             |
+| **Security layers**      | Helmet, CORS whitelist, rate limit per endpoint type, path traversal check, HMAC webhook |
+| **Developer experience** | OpenAPI auto-generated, E2E test Playwright, unit test Vitest                            |
+| **Bilingual UX**         | Semua konten punya label Bahasa Indonesia + Jepang (aksara Kanji/Hiragana)               |
+| **PDF engine custom**    | PDFKit + custom font CJK → generate dokumen resmi Jepang dari browser                    |
 
 ---
 
@@ -119,6 +131,7 @@
 ### 4.1. Re-branding & Customisasi Domain
 
 **Yang WAJIB diganti:**
+
 - Nama "JIJP" / "Japan Industry Training Academy" → nama Akordium sendiri atau nama klien fiktif (e.g., **"Nexora Academy"**, **"TalentBridge"**)
 - Referensi "ICE Center ITB" → generikkan menjadi "Enterprise SSO Integration"
 - URL hardcode `isense-technology.com` → domain demo Akordium
@@ -127,31 +140,30 @@
 - Konten mock data (stats, milestone karir, curriculum) → buat yang lebih neutral/universal
 
 **Yang bisa dipertahankan:**
+
 - Semua arsitektur, pattern, dan logika bisnis
 
 ### 4.2. Upgrade Stack untuk Lebih Impress Klien
 
-| Area | Kondisi Sekarang | Rekomendasi Upgrade |
-|---|---|---|
-| **Backend** | Express.js monolith `server.js` 1540 baris | Refactor ke modular yang sudah didesain di AGENTS.md (sudah ada blue print-nya) |
-| **Auth** | Express-session (cookie) | Tambah JWT refresh token flow untuk mobile-ready |
-| **Database** | MySQL | Bisa tetap, atau tambahkan contoh PostgreSQL variant untuk klien yang prefer Postgres |
-| **File Storage** | Local disk (`uploads/`) | Tambah S3/MinIO adapter (sudah ada placeholder di AGENTS.md) |
-| **Queue** | Synchronous in-request | Tambah BullMQ (sudah disebut di arsitektur, belum diimplementasi) |
-| **CV PDF** | PDFKit basic | Upgrade ke Puppeteer (HTML → PDF) untuk template yang lebih kaya visual |
+| Area             | Kondisi Sekarang                           | Rekomendasi Upgrade                                                                   |
+| ---------------- | ------------------------------------------ | ------------------------------------------------------------------------------------- |
+| **Backend**      | Express.js monolith `server.js` 1540 baris | Refactor ke modular yang sudah didesain di AGENTS.md (sudah ada blue print-nya)       |
+| **Auth**         | Express-session (cookie)                   | Tambah JWT refresh token flow untuk mobile-ready                                      |
+| **Database**     | MySQL                                      | Bisa tetap, atau tambahkan contoh PostgreSQL variant untuk klien yang prefer Postgres |
+| **File Storage** | Local disk (`uploads/`)                    | Tambah S3/MinIO adapter (sudah ada placeholder di AGENTS.md)                          |
+| **Queue**        | Synchronous in-request                     | Tambah BullMQ (sudah disebut di arsitektur, belum diimplementasi)                     |
+| **CV PDF**       | PDFKit basic                               | Upgrade ke Puppeteer (HTML → PDF) untuk template yang lebih kaya visual               |
 
 ### 4.3. Fitur Tambahan yang Akan Buat Portofolio Lebih Kuat
 
 **High impact, medium effort:**
+
 1. **Dark mode** — CSS variables sudah siap, tinggal toggle
 2. **Real-time notifications** — Socket.io in-app push (ganti dari polling)
 3. **Dashboard analytics chart** — Recharts/Chart.js untuk admin stats visual
 4. **Multi-language i18n** — react-i18next (konten sudah bilingual, tinggal ekstrak)
 
-**High impact, high effort (worth it untuk showcase):**
-5. **AI Matching Score** — Tambah scoring sederhana (JLPT match + specialization overlap) sebagai "AI feature"
-6. **Mobile responsive** — CSS sudah lumayan, tapi belum fully optimized untuk mobile
-7. **Export ke Excel** — Admin bisa export daftar kandidat/lamaran
+**High impact, high effort (worth it untuk showcase):** 5. **AI Matching Score** — Tambah scoring sederhana (JLPT match + specialization overlap) sebagai "AI feature" 6. **Mobile responsive** — CSS sudah lumayan, tapi belum fully optimized untuk mobile 7. **Export ke Excel** — Admin bisa export daftar kandidat/lamaran
 
 ### 4.4. Yang HARUS Dibersihkan Sebelum Show ke Klien
 
@@ -181,6 +193,7 @@ Akordium Portfolio — TalentBridge Platform
 ```
 
 **Poin jual utama ke klien:**
+
 - "Platform multi-tenant dengan 6 user role"
 - "Integrasi SSO enterprise-ready"
 - "PDF generation dengan karakter multi-bahasa"
@@ -190,14 +203,14 @@ Akordium Portfolio — TalentBridge Platform
 
 ### 4.6. Estimasi Effort Cleanup + Rebrand
 
-| Task | Estimasi |
-|---|---|
-| Rebrand nama, warna, logo | 2–3 jam |
-| Hapus credential hardcode + ENV cleanup | 1 jam |
-| Perbaiki Swagger/OpenAPI spec | 3–4 jam |
-| Upgrade seeder dengan data demo yang proper | 2 jam |
-| Deploy ke Coolify dengan domain demo | 1–2 jam |
-| **Total minimum** | **~10 jam** |
+| Task                                        | Estimasi    |
+| ------------------------------------------- | ----------- |
+| Rebrand nama, warna, logo                   | 2–3 jam     |
+| Hapus credential hardcode + ENV cleanup     | 1 jam       |
+| Perbaiki Swagger/OpenAPI spec               | 3–4 jam     |
+| Upgrade seeder dengan data demo yang proper | 2 jam       |
+| Deploy ke Coolify dengan domain demo        | 1–2 jam     |
+| **Total minimum**                           | **~10 jam** |
 
 Untuk upgrade stack (modular refactor, BullMQ, S3): estimasi tambahan 2–3 hari.
 

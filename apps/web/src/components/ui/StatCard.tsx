@@ -22,7 +22,8 @@ const statCardVariants = cva(
 );
 
 export interface StatCardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof statCardVariants> {
   label: string;
   value: string | number;

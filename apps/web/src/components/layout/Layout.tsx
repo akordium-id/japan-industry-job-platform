@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 
-
 import { Header } from "./Header";
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";

@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, AlertTriangle, Clock, CheckCircle2, Sparkles, FileText } from "lucide-react";
+import {
+  ArrowRight,
+  AlertTriangle,
+  Clock,
+  CheckCircle2,
+  Sparkles,
+  FileText,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -108,7 +115,8 @@ export function ActionHero({
         <div className="space-y-3 max-w-2xl">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-semibold text-slate-500">
-              Halo, <strong className="text-slate-900">{displayName}</strong> {displayJp}
+              Halo, <strong className="text-slate-900">{displayName}</strong>{" "}
+              {displayJp}
             </span>
             <span className="text-slate-300">•</span>
             <Badge variant={action.badgeVariant} size="sm">
@@ -121,10 +129,14 @@ export function ActionHero({
               <Icon className="w-5 h-5 shrink-0 text-slate-700" />
               <span>{action.title}</span>
             </h2>
-            <p className="text-xs font-medium text-slate-400 mt-0.5">{action.titleJp}</p>
+            <p className="text-xs font-medium text-slate-400 mt-0.5">
+              {action.titleJp}
+            </p>
           </div>
 
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{action.desc}</p>
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            {action.desc}
+          </p>
         </div>
 
         {/* Action Buttons */}
@@ -141,7 +153,11 @@ export function ActionHero({
             </Button>
           </Link>
           <Link to="/student/calendar" className="text-decoration-none">
-            <Button variant="ghost" size="md" className="w-full sm:w-auto justify-center">
+            <Button
+              variant="ghost"
+              size="md"
+              className="w-full sm:w-auto justify-center"
+            >
               Jadwal Sesi
             </Button>
           </Link>

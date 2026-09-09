@@ -38,7 +38,8 @@ const progressFillVariants = cva(
 );
 
 export interface ProgressBarProps
-  extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>,
+  extends
+    React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>,
     VariantProps<typeof progressTrackVariants>,
     VariantProps<typeof progressFillVariants> {
   value?: number;
@@ -70,7 +71,9 @@ const ProgressBar = React.forwardRef<
       <div className="w-full space-y-1.5">
         {(label || showValue) && (
           <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)] font-medium">
-            {label && <span className="text-[var(--color-text-primary)]">{label}</span>}
+            {label && (
+              <span className="text-[var(--color-text-primary)]">{label}</span>
+            )}
             {showValue && <span>{clamped}%</span>}
           </div>
         )}

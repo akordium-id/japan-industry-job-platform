@@ -216,7 +216,10 @@ export function Navbar() {
                 {user.role === "student" && (
                   <>
                     <DropdownMenuItem asChild>
-                      <Link to="/student/profile" className="cursor-pointer gap-2.5">
+                      <Link
+                        to="/student/profile"
+                        className="cursor-pointer gap-2.5"
+                      >
                         <User className="h-4 w-4 text-[var(--color-text-secondary)]" />
                         <div>
                           <p className="text-sm font-medium">My Profile</p>
@@ -227,7 +230,10 @@ export function Navbar() {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link to="/student/vault" className="cursor-pointer gap-2.5">
+                      <Link
+                        to="/student/vault"
+                        className="cursor-pointer gap-2.5"
+                      >
                         <FolderLock className="h-4 w-4 text-[var(--color-text-secondary)]" />
                         <div>
                           <p className="text-sm font-medium">Document Vault</p>
@@ -256,19 +262,29 @@ export function Navbar() {
                     <DropdownMenuItem asChild>
                       <Link to="/corporate" className="cursor-pointer gap-2.5">
                         <Building2 className="h-4 w-4 text-[var(--color-text-secondary)]" />
-                        <span className="text-sm font-medium">Recruitment Portal</span>
+                        <span className="text-sm font-medium">
+                          Recruitment Portal
+                        </span>
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link to="/corporate/jobs" className="cursor-pointer gap-2.5">
+                      <Link
+                        to="/corporate/jobs"
+                        className="cursor-pointer gap-2.5"
+                      >
                         <Briefcase className="h-4 w-4 text-[var(--color-text-secondary)]" />
                         <span className="text-sm font-medium">Manage Jobs</span>
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link to="/corporate/scout" className="cursor-pointer gap-2.5">
+                      <Link
+                        to="/corporate/scout"
+                        className="cursor-pointer gap-2.5"
+                      >
                         <Search className="h-4 w-4 text-[var(--color-text-secondary)]" />
-                        <span className="text-sm font-medium">Scout Talent</span>
+                        <span className="text-sm font-medium">
+                          Scout Talent
+                        </span>
                       </Link>
                     </DropdownMenuItem>
                   </>
@@ -276,9 +292,14 @@ export function Navbar() {
 
                 {user.role === "admin" && (
                   <DropdownMenuItem asChild>
-                    <Link to="/admin/verifications" className="cursor-pointer gap-2.5">
+                    <Link
+                      to="/admin/verifications"
+                      className="cursor-pointer gap-2.5"
+                    >
                       <ShieldCheck className="h-4 w-4 text-[var(--color-text-secondary)]" />
-                      <span className="text-sm font-medium">Document Verification</span>
+                      <span className="text-sm font-medium">
+                        Document Verification
+                      </span>
                     </Link>
                   </DropdownMenuItem>
                 )}
@@ -323,7 +344,10 @@ export function Navbar() {
                     <Menu className="h-5 w-5" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-[300px] sm:w-[360px] flex flex-col">
+                <SheetContent
+                  side="right"
+                  className="w-[300px] sm:w-[360px] flex flex-col"
+                >
                   <SheetHeader className="border-b border-[var(--color-border)] pb-4 text-left">
                     <SheetTitle className="text-lg font-bold text-[var(--color-accent)]">
                       {BRAND_NAME}

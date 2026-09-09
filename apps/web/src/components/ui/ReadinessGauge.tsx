@@ -42,10 +42,19 @@ export function ReadinessGauge({
 
   const badgeStatus =
     clampedScore >= 80
-      ? { text: "Work Ready", class: "bg-emerald-50 text-emerald-700 border-emerald-200" }
+      ? {
+          text: "Work Ready",
+          class: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        }
       : clampedScore >= 50
-        ? { text: "In Progress", class: "bg-amber-50 text-amber-700 border-amber-200" }
-        : { text: "Action Needed", class: "bg-rose-50 text-rose-700 border-rose-200" };
+        ? {
+            text: "In Progress",
+            class: "bg-amber-50 text-amber-700 border-amber-200",
+          }
+        : {
+            text: "Action Needed",
+            class: "bg-rose-50 text-rose-700 border-rose-200",
+          };
 
   return (
     <div
@@ -58,7 +67,10 @@ export function ReadinessGauge({
       {...props}
     >
       {/* Circular Gauge */}
-      <div className="relative flex items-center justify-center shrink-0" style={{ width: size, height: size }}>
+      <div
+        className="relative flex items-center justify-center shrink-0"
+        style={{ width: size, height: size }}
+      >
         <svg width={size} height={size} className="rotate-[-90deg]">
           {/* Background track */}
           <circle
@@ -77,7 +89,10 @@ export function ReadinessGauge({
             strokeDasharray={circumference}
             strokeDashoffset={offset}
             strokeLinecap="round"
-            className={cn("fill-transparent stroke-current transition-all duration-700 ease-out", strokeColor)}
+            className={cn(
+              "fill-transparent stroke-current transition-all duration-700 ease-out",
+              strokeColor,
+            )}
           />
         </svg>
 
@@ -124,7 +139,9 @@ export function ReadinessGauge({
                 <span
                   className={cn(
                     "truncate",
-                    item.passed ? "text-slate-700 font-medium" : "text-slate-400",
+                    item.passed
+                      ? "text-slate-700 font-medium"
+                      : "text-slate-400",
                   )}
                 >
                   {item.label}

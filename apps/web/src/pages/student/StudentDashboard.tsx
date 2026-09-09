@@ -1,10 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import {
-  FileText,
-  Briefcase,
-  ArrowRight,
-} from "lucide-react";
+import { FileText, Briefcase, ArrowRight } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -209,7 +205,9 @@ export default function StudentDashboard() {
                 <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                   Japanese CV Builder
                 </h3>
-                <p className="text-xs text-slate-500">履歴書 (JIS Standard PDF)</p>
+                <p className="text-xs text-slate-500">
+                  履歴書 (JIS Standard PDF)
+                </p>
               </div>
             </div>
             <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
@@ -227,7 +225,9 @@ export default function StudentDashboard() {
                 <h3 className="text-sm font-bold text-slate-900 group-hover:text-red-600 transition-colors">
                   Job Matching & Scout
                 </h3>
-                <p className="text-xs text-slate-500">Lowongan Aktif & Lamaran</p>
+                <p className="text-xs text-slate-500">
+                  Lowongan Aktif & Lamaran
+                </p>
               </div>
             </div>
             <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
@@ -295,7 +295,10 @@ export default function StudentDashboard() {
             subtitle="カリキュラムトラック — Persiapan Bahasa & Budaya Kerja Jepang"
             padding="lg"
             headerAction={
-              <Link to="/student/courses" className="text-xs font-semibold text-red-600 hover:text-red-700 flex items-center gap-1">
+              <Link
+                to="/student/courses"
+                className="text-xs font-semibold text-red-600 hover:text-red-700 flex items-center gap-1"
+              >
                 Lihat Semua Modul <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             }
@@ -376,7 +379,10 @@ export default function StudentDashboard() {
             subtitle="Dokumen Verifikasi"
             padding="lg"
             headerAction={
-              <Link to="/student/vault" className="text-xs font-semibold text-red-600 hover:text-red-700">
+              <Link
+                to="/student/vault"
+                className="text-xs font-semibold text-red-600 hover:text-red-700"
+              >
                 Kelola ({documents.length})
               </Link>
             }
@@ -399,7 +405,9 @@ export default function StudentDashboard() {
                     key={cred.id}
                     className="flex items-center justify-between gap-3 p-2.5 rounded-lg border border-slate-100 bg-white"
                   >
-                    <span className="text-xl shrink-0">{credentialIcon(cred.type)}</span>
+                    <span className="text-xl shrink-0">
+                      {credentialIcon(cred.type)}
+                    </span>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-bold text-slate-900 truncate">
                         {cred.title}
@@ -409,7 +417,9 @@ export default function StudentDashboard() {
                       </p>
                     </div>
                     <Badge
-                      variant={credentialStatusVariant(cred.verification_status)}
+                      variant={credentialStatusVariant(
+                        cred.verification_status,
+                      )}
                       size="sm"
                       dot
                     >
@@ -427,7 +437,10 @@ export default function StudentDashboard() {
             subtitle="Sesi Mendatang"
             padding="lg"
             headerAction={
-              <Link to="/student/calendar" className="text-xs font-semibold text-slate-500 hover:text-slate-700">
+              <Link
+                to="/student/calendar"
+                className="text-xs font-semibold text-slate-500 hover:text-slate-700"
+              >
                 Kalender
               </Link>
             }
@@ -445,15 +458,21 @@ export default function StudentDashboard() {
                   >
                     <div className="flex items-center justify-between gap-2 mb-1">
                       <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                        {sess.type === "partner_meeting" ? "Mitra / Mentor" : "Pelatihan"}
+                        {sess.type === "partner_meeting"
+                          ? "Mitra / Mentor"
+                          : "Pelatihan"}
                       </span>
                       <span className="text-[10px] text-slate-400">
                         {formatDate(sess.start_at)}
                       </span>
                     </div>
-                    <h5 className="text-xs font-bold text-slate-900">{sess.title}</h5>
+                    <h5 className="text-xs font-bold text-slate-900">
+                      {sess.title}
+                    </h5>
                     {sess.title_jp && (
-                      <p className="text-[11px] text-slate-400">{sess.title_jp}</p>
+                      <p className="text-[11px] text-slate-400">
+                        {sess.title_jp}
+                      </p>
                     )}
                   </li>
                 ))}

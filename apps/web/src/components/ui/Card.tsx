@@ -12,8 +12,7 @@ interface LegacyCardProps {
 }
 
 export interface CardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    LegacyCardProps {}
+  extends React.HTMLAttributes<HTMLDivElement>, LegacyCardProps {}
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   (

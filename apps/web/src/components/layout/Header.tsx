@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, ChevronDown, User as UserIcon, LogOut, CheckCircle2, AlertCircle } from "lucide-react";
+import {
+  Menu,
+  ChevronDown,
+  User as UserIcon,
+  LogOut,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { Avatar } from "@/components/ui/Avatar";
@@ -39,19 +46,32 @@ export function Header() {
   // Derive page title from current route
   const getPageContext = () => {
     const path = location.pathname;
-    if (path === "/student") return { title: "Pathway Dashboard", jp: "進路ダッシュボード" };
-    if (path.startsWith("/student/courses")) return { title: "Learning Tracks", jp: "研修カリキュラム" };
-    if (path.startsWith("/student/vault")) return { title: "Document Vault", jp: "書類アーカイブ" };
-    if (path.startsWith("/student/cv")) return { title: "Japanese Rirekisho", jp: "履歴書作成" };
-    if (path.startsWith("/student/jobs")) return { title: "Jobs & Matching", jp: "求人マッチング" };
-    if (path.startsWith("/student/calendar")) return { title: "Class Calendar", jp: "日程表" };
-    if (path.startsWith("/student/profile")) return { title: "Candidate Profile", jp: "候補者情報" };
-    if (path.startsWith("/corporate/jobs")) return { title: "Manage Job Openings", jp: "求人管理" };
-    if (path.startsWith("/corporate/scout")) return { title: "Scout Talents", jp: "スカウト検索" };
-    if (path.startsWith("/corporate")) return { title: "Recruitment Portal", jp: "採用ポータル" };
-    if (path.startsWith("/educator")) return { title: "Educator Portal", jp: "教育指導ポータル" };
-    if (path.startsWith("/career")) return { title: "Career Timeline", jp: "キャリア軌跡" };
-    if (path.startsWith("/admin")) return { title: "Admin Verification", jp: "審査管理" };
+    if (path === "/student")
+      return { title: "Pathway Dashboard", jp: "進路ダッシュボード" };
+    if (path.startsWith("/student/courses"))
+      return { title: "Learning Tracks", jp: "研修カリキュラム" };
+    if (path.startsWith("/student/vault"))
+      return { title: "Document Vault", jp: "書類アーカイブ" };
+    if (path.startsWith("/student/cv"))
+      return { title: "Japanese Rirekisho", jp: "履歴書作成" };
+    if (path.startsWith("/student/jobs"))
+      return { title: "Jobs & Matching", jp: "求人マッチング" };
+    if (path.startsWith("/student/calendar"))
+      return { title: "Class Calendar", jp: "日程表" };
+    if (path.startsWith("/student/profile"))
+      return { title: "Candidate Profile", jp: "候補者情報" };
+    if (path.startsWith("/corporate/jobs"))
+      return { title: "Manage Job Openings", jp: "求人管理" };
+    if (path.startsWith("/corporate/scout"))
+      return { title: "Scout Talents", jp: "スカウト検索" };
+    if (path.startsWith("/corporate"))
+      return { title: "Recruitment Portal", jp: "採用ポータル" };
+    if (path.startsWith("/educator"))
+      return { title: "Educator Portal", jp: "教育指導ポータル" };
+    if (path.startsWith("/career"))
+      return { title: "Career Timeline", jp: "キャリア軌跡" };
+    if (path.startsWith("/admin"))
+      return { title: "Admin Verification", jp: "審査管理" };
     return { title: "Portal", jp: "ポータル" };
   };
 
@@ -77,7 +97,9 @@ export function Header() {
               <SheetTitle className="text-base font-bold text-slate-900">
                 {BRAND_NAME}
               </SheetTitle>
-              <span className="text-[11px] text-slate-400">日本就職ポータル</span>
+              <span className="text-[11px] text-slate-400">
+                日本就職ポータル
+              </span>
             </SheetHeader>
             <div className="flex-1 overflow-y-auto p-4 space-y-2">
               {user.role === "student" && (
@@ -202,10 +224,17 @@ export function Header() {
               <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-60 p-2 shadow-lg rounded-xl border-slate-200">
+          <DropdownMenuContent
+            align="end"
+            className="w-60 p-2 shadow-lg rounded-xl border-slate-200"
+          >
             <DropdownMenuLabel className="font-normal p-2">
-              <p className="text-xs font-bold text-slate-900 truncate">{user.name}</p>
-              <p className="text-[11px] text-slate-500 truncate">{user.email}</p>
+              <p className="text-xs font-bold text-slate-900 truncate">
+                {user.name}
+              </p>
+              <p className="text-[11px] text-slate-500 truncate">
+                {user.email}
+              </p>
               <div className="mt-1.5">
                 <Badge variant="student" size="sm">
                   {user.role}
@@ -214,7 +243,10 @@ export function Header() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link to="/student/profile" className="flex items-center gap-2 text-xs cursor-pointer">
+              <Link
+                to="/student/profile"
+                className="flex items-center gap-2 text-xs cursor-pointer"
+              >
                 <UserIcon className="w-3.5 h-3.5" />
                 Profile Settings
               </Link>
