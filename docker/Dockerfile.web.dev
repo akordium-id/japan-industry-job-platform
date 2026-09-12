@@ -9,6 +9,7 @@ COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml .npmrc turbo.json ./
 COPY apps/api/package.json ./apps/api/package.json
 COPY apps/web/package.json ./apps/web/package.json
 COPY packages/types/package.json ./packages/types/package.json
+COPY packages/validators/package.json ./packages/validators/package.json
 COPY tooling/eslint/package.json ./tooling/eslint/package.json
 COPY tooling/typescript/package.json ./tooling/typescript/package.json
 

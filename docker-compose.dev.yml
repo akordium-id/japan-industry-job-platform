@@ -1,0 +1,71 @@
+services:
+  mysql:
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpass}
+      MYSQL_DATABASE: ${DB_NAME:-jijp_db}
+      MYSQL_USER: ${DB_USER:-jijp_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-changeme}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "127.0.0.1",
+          "-uroot",
+          "-p$$MYSQL_ROOT_PASSWORD",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api.dev
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    env_file:
+      - ./apps/api/.env
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./apps/api:/app/apps/api
+      - ./packages:/app/packages
+      - ./tooling:/app/tooling
+      - /app/node_modules
+      - /app/apps/api/node_modules
+    working_dir: /app/apps/api
+    command: pnpm dev
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.web.dev
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./apps/web:/app/apps/web
+      - ./packages:/app/packages
+      - ./tooling:/app/tooling
+      - /app/node_modules
+      - /app/apps/web/node_modules
+    working_dir: /app/apps/web
+    environment:
+      VITE_API_URL: http://localhost:3001
+    command: pnpm dev --host
+
+volumes:
+  mysql_data:

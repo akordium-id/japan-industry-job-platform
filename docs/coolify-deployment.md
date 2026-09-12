@@ -27,9 +27,9 @@ Dokumen ini menjelaskan langkah-langkah deployment monorepo **Japan Industry Job
 ### 2. Atur Konfigurasi Compose File
 
 1. Di tab konfigurasi resource, temukan **Docker Compose Location**.
-2. Arahkan ke:
+2. Arahkan ke (bisa biarkan default `docker-compose.yml` atau `docker-compose.prod.yml`):
    ```text
-   docker-compose.prod.yml
+   docker-compose.yml
    ```
 3. Set **Base Directory** ke:
    ```text
