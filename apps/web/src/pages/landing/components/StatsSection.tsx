@@ -1,4 +1,10 @@
-import { TrendingUp, Users, Building2, Clock, CheckCircle2 } from "lucide-react";
+import {
+  TrendingUp,
+  Users,
+  Building2,
+  Clock,
+  CheckCircle2,
+} from "lucide-react";
 
 import { PLATFORM_STATS } from "@/lib/constants";
 

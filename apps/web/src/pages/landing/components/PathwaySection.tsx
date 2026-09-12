@@ -33,7 +33,8 @@ const PATHWAY_STEPS = [
     title: "Vault Berkas & Rirekisho",
     titleJp: "書類審査 & 履歴書完成",
     icon: FileCheck2,
-    color: "from-purple-500/20 to-purple-600/5 text-purple-600 border-purple-200",
+    color:
+      "from-purple-500/20 to-purple-600/5 text-purple-600 border-purple-200",
     badgeVariant: "corporate" as const,
     points: [
       "Pembuatan otomatis Rirekisho & Shokumu Keirekisho format JIS",
@@ -61,7 +62,8 @@ const PATHWAY_STEPS = [
     title: "Visa COE & Relokasi Resmi",
     titleJp: "ビザ発給 & 定着支援",
     icon: PlaneTakeoff,
-    color: "from-emerald-500/20 to-emerald-600/5 text-emerald-600 border-emerald-200",
+    color:
+      "from-emerald-500/20 to-emerald-600/5 text-emerald-600 border-emerald-200",
     badgeVariant: "success" as const,
     points: [
       "Penerbitan kontrak kerja resmi tanpa potongan gaji liar",
@@ -73,20 +75,27 @@ const PATHWAY_STEPS = [
 
 export function PathwaySection() {
   return (
-    <section id="pathway" className="py-20 bg-slate-50 border-y border-slate-200/80">
+    <section
+      id="pathway"
+      className="py-20 bg-slate-50 border-y border-slate-200/80"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-xs font-semibold text-red-700 uppercase tracking-wider mb-3">
             <span>The Pathway to Japan</span>
             <span>•</span>
-            <span className="font-normal font-mono">日本就職のロードマップ</span>
+            <span className="font-normal font-mono">
+              日本就職のロードマップ
+            </span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             4 Tahap Pasti Menuju Karier Profesional di Jepang
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-            Tidak perlu bingung harus mulai dari mana. JIJP menyediakan ekosistem terpadu yang memandu setiap langkahmu dari persiapan dasar hingga penempatan kerja resmi.
+            Tidak perlu bingung harus mulai dari mana. JIJP menyediakan
+            ekosistem terpadu yang memandu setiap langkahmu dari persiapan dasar
+            hingga penempatan kerja resmi.
           </p>
         </div>
 
@@ -155,14 +164,18 @@ export function PathwaySection() {
                 Transparansi 100% & Kepatuhan Regulasi Bilateral
               </h4>
               <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                Seluruh program dan mitra perusahaan terdaftar resmi di bawah kerangka kerja sama industri Indonesia-Jepang.
+                Seluruh program dan mitra perusahaan terdaftar resmi di bawah
+                kerangka kerja sama industri Indonesia-Jepang.
               </p>
             </div>
           </div>
-          <Button asChild variant="primary" size="md" className="shrink-0 font-semibold">
-            <Link to="/student/courses">
-              Lihat Modul Persiapan
-            </Link>
+          <Button
+            asChild
+            variant="primary"
+            size="md"
+            className="shrink-0 font-semibold"
+          >
+            <Link to="/student/courses">Lihat Modul Persiapan</Link>
           </Button>
         </div>
       </div>

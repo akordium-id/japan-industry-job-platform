@@ -9,7 +9,8 @@ interface FaqItem {
 
 const FAQS: FaqItem[] = [
   {
-    question: "Apakah saya harus sudah bisa bahasa Jepang (punya sertifikat JLPT) untuk bergabung?",
+    question:
+      "Apakah saya harus sudah bisa bahasa Jepang (punya sertifikat JLPT) untuk bergabung?",
     questionJp: "日本語の資格がなくても応募できますか？",
     answer:
       "Tidak wajib. Kamu bisa mulai mendaftar meski belum memiliki kemampuan bahasa Jepang sama sekali. Platform JIJP menyediakan modul kurikulum mandiri dan kelas bimbingan terstruktur mulai dari nol (Hiragana, Katakana, N5) hingga persiapan ujian JLPT N4/N3 yang merupakan syarat minimal sebagian besar industri di Jepang.",
@@ -21,7 +22,8 @@ const FAQS: FaqItem[] = [
       "JIJP memfasilitasi jalur visa kerja resmi sesuai kualifikasi pendidikanmu: (1) Tokutei Ginou / Specified Skilled Worker (SSW 1 & SSW 2) untuk bidang manufaktur, perhotelan, pertanian, pengolahan makanan, dan konstruksi; serta (2) Gijinkoku (Engineer / Specialist in Humanities) bagi lulusan D3/D4/S1 jurusan Teknik, Komputer/IT, dan Bahasa.",
   },
   {
-    question: "Apakah ada biaya pendaftaran tersembunyi atau potongan gaji sepihak?",
+    question:
+      "Apakah ada biaya pendaftaran tersembunyi atau potongan gaji sepihak?",
     questionJp: "不透明な仲介手数料や給与天引きはありますか？",
     answer:
       "Sama sekali tidak ada. JIJP berpegang teguh pada prinsip Zero-Exploitation dan kepatuhan bilateral. Semua penawaran kerja mencantumkan rincian upah pokok, tunjangan, asuransi sosial Jepang (Shakai Hoken), dan biaya sewa tempat tinggal secara transparan sebelum kontrak ditandatangani.",
@@ -33,7 +35,8 @@ const FAQS: FaqItem[] = [
       "Cukup lengkapi data profil dan portofoliomu di platform. Sistem JIJP secara otomatis menyusun dan mengonversi berkasmu menjadi dokumen Rirekisho & Shokumu Keirekisho berstandar resmi JIS (Japanese Industrial Standards) dalam bahasa Jepang yang siap diajukan ke HR perusahaan mitra.",
   },
   {
-    question: "Apa keunggulan mentoring dari Senior Industry Mentors (Silver Mentors)?",
+    question:
+      "Apa keunggulan mentoring dari Senior Industry Mentors (Silver Mentors)?",
     questionJp: "シニアメンターによる指導のメリットは何ですか？",
     answer:
       "Silver Mentors kami adalah para profesional dan eksekutif purnatugas korporasi global Jepang (seperti ex-Toyota dan Nippon Steel). Mereka memberikan simulasi langsung etika wawancara bisnis (Keigo), budaya pengambilan keputusan (Nemawashi), serta protokol keselamatan industri (5S), sehingga kamu tiba di Jepang dengan kesiapan mental profesional.",
@@ -62,7 +65,8 @@ export function FaqSection() {
             Pertanyaan yang Sering Diajukan
           </h2>
           <p className="mt-4 text-base text-slate-600">
-            Segala hal yang perlu kamu ketahui seputar persiapan, legalitas visa, dan proses seleksi kerja ke Jepang.
+            Segala hal yang perlu kamu ketahui seputar persiapan, legalitas
+            visa, dan proses seleksi kerja ke Jepang.
           </p>
         </div>
 
@@ -107,7 +111,8 @@ export function FaqSection() {
 
         {/* Support Help note */}
         <div className="mt-10 text-center text-xs text-slate-500">
-          Punya pertanyaan spesifik lain? Hubungi tim pendamping kami melalui email di{" "}
+          Punya pertanyaan spesifik lain? Hubungi tim pendamping kami melalui
+          email di{" "}
           <a
             href="mailto:support@jijp.id"
             className="font-bold text-red-600 hover:underline"

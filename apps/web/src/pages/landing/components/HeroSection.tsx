@@ -64,7 +64,9 @@ export function HeroSection() {
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Program Resmi Bilateral Indonesia – Jepang</span>
               <span className="text-slate-400">•</span>
-              <span className="text-slate-500 font-mono text-[11px]">日尼公式人材交流</span>
+              <span className="text-slate-500 font-mono text-[11px]">
+                日尼公式人材交流
+              </span>
             </div>
 
             {/* Main Headline */}
@@ -81,13 +83,20 @@ export function HeroSection() {
 
             {/* Subtitle bilingual */}
             <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-semibold text-slate-500 mb-6 tracking-wide">
-              <span>{BRAND_NAME} — {BRAND_TAGLINE}</span>
+              <span>
+                {BRAND_NAME} — {BRAND_TAGLINE}
+              </span>
               <span className="hidden sm:inline text-slate-300">•</span>
-              <span className="text-slate-600 font-mono">日本企業直結の就職支援プラットフォーム</span>
+              <span className="text-slate-600 font-mono">
+                日本企業直結の就職支援プラットフォーム
+              </span>
             </div>
 
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mb-8">
-              Bimbingan pra-migrasi terintegrasi dari nol hingga penempatan kerja resmi. Kuasai bahasa & etika kerja industri (Hou-Ren-So), amankan berkas di Vault digital, dan dapatkan kontrak kerja langsung dari perusahaan Jepang terkemuka.
+              Bimbingan pra-migrasi terintegrasi dari nol hingga penempatan
+              kerja resmi. Kuasai bahasa & etika kerja industri (Hou-Ren-So),
+              amankan berkas di Vault digital, dan dapatkan kontrak kerja
+              langsung dari perusahaan Jepang terkemuka.
             </p>
 
             {/* Call to Actions */}
@@ -98,7 +107,10 @@ export function HeroSection() {
                 variant="primary"
                 className="bg-red-600 hover:bg-red-700 text-white font-bold shadow-md shadow-red-600/20 px-7 py-3.5 text-base transition-transform hover:-translate-y-0.5 cursor-pointer"
               >
-                <Link to="/student/jobs" className="inline-flex items-center justify-center gap-2">
+                <Link
+                  to="/student/jobs"
+                  className="inline-flex items-center justify-center gap-2"
+                >
                   <Search className="w-5 h-5" />
                   <span>Jelajahi Lowongan Jepang</span>
                   <ArrowRight className="w-4 h-4 ml-1" />
@@ -112,7 +124,9 @@ export function HeroSection() {
                 className="border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-bold px-7 py-3.5 text-base shadow-2xs hover:border-slate-400"
               >
                 <Link to={getDashboardPath()}>
-                  {isAuthenticated ? "Buka Portal Dashboard" : "Daftar Calon Kandidat"}
+                  {isAuthenticated
+                    ? "Buka Portal Dashboard"
+                    : "Daftar Calon Kandidat"}
                 </Link>
               </Button>
             </div>
@@ -121,15 +135,21 @@ export function HeroSection() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-200 w-full text-xs text-slate-600">
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span className="font-medium">100% Visa Kerja Resmi (SSW & Gijinkoku)</span>
+                <span className="font-medium">
+                  100% Visa Kerja Resmi (SSW & Gijinkoku)
+                </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span className="font-medium">Bimbingan Eksekutif Mentor ex-Toyota</span>
+                <span className="font-medium">
+                  Bimbingan Eksekutif Mentor ex-Toyota
+                </span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span className="font-medium">Standar Upah Transparan Tanpa Potongan</span>
+                <span className="font-medium">
+                  Standar Upah Transparan Tanpa Potongan
+                </span>
               </div>
             </div>
           </div>
@@ -142,7 +162,11 @@ export function HeroSection() {
               className="absolute -right-6 -bottom-6 w-36 h-36 rounded-full border-4 border-dashed border-red-600/15 flex items-center justify-center rotate-12 pointer-events-none select-none"
             >
               <div className="text-center font-serif text-red-600/20 font-bold text-xs tracking-widest uppercase">
-                JIJP OFFICIAL<br />公認認定<br />STANDARD
+                JIJP OFFICIAL
+                <br />
+                公認認定
+                <br />
+                STANDARD
               </div>
             </div>
 
@@ -160,7 +184,9 @@ export function HeroSection() {
                         <span className="font-bold text-slate-900 text-sm">
                           Ahmad Fauzi
                         </span>
-                        <span className="text-xs text-slate-400">• Bandung</span>
+                        <span className="text-xs text-slate-400">
+                          • Bandung
+                        </span>
                       </div>
                       <div className="text-xs text-slate-500 font-medium">
                         Otomasi & Rekayasa Mesin Presisi
@@ -168,7 +194,11 @@ export function HeroSection() {
                     </div>
                   </div>
 
-                  <Badge variant="success" size="sm" className="bg-emerald-50 text-emerald-700 border-emerald-200">
+                  <Badge
+                    variant="success"
+                    size="sm"
+                    className="bg-emerald-50 text-emerald-700 border-emerald-200"
+                  >
                     <ShieldCheck className="w-3 h-3 text-emerald-600" />
                     <span>Verified Talent</span>
                   </Badge>
@@ -176,16 +206,28 @@ export function HeroSection() {
 
                 <div className="grid grid-cols-3 gap-2 my-3 text-center">
                   <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
-                    <div className="text-[10px] text-slate-400">Kemampuan Bahasa</div>
-                    <div className="text-xs font-bold text-slate-800">JLPT N3 Lulus</div>
+                    <div className="text-[10px] text-slate-400">
+                      Kemampuan Bahasa
+                    </div>
+                    <div className="text-xs font-bold text-slate-800">
+                      JLPT N3 Lulus
+                    </div>
                   </div>
                   <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
-                    <div className="text-[10px] text-slate-400">Skor Budaya & Keigo</div>
-                    <div className="text-xs font-bold text-emerald-600">92% Ready</div>
+                    <div className="text-[10px] text-slate-400">
+                      Skor Budaya & Keigo
+                    </div>
+                    <div className="text-xs font-bold text-emerald-600">
+                      92% Ready
+                    </div>
                   </div>
                   <div className="p-2 rounded-lg bg-slate-50 border border-slate-100">
-                    <div className="text-[10px] text-slate-400">Status Berkas</div>
-                    <div className="text-xs font-bold text-slate-800">Vault Valid</div>
+                    <div className="text-[10px] text-slate-400">
+                      Status Berkas
+                    </div>
+                    <div className="text-xs font-bold text-slate-800">
+                      Vault Valid
+                    </div>
                   </div>
                 </div>
 
@@ -217,7 +259,11 @@ export function HeroSection() {
                     </div>
                   </div>
 
-                  <Badge variant="accent" size="sm" className="bg-red-500/20 text-red-300 border-red-500/30">
+                  <Badge
+                    variant="accent"
+                    size="sm"
+                    className="bg-red-500/20 text-red-300 border-red-500/30"
+                  >
                     <Sparkles className="w-3 h-3 text-red-400" />
                     <span>94% Match</span>
                   </Badge>

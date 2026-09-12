@@ -32,7 +32,9 @@ export function CtaBannerSection() {
         </h2>
 
         <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Jangan tunda lagi. Mulai bangun fondasi bahasa, susun Rirekisho standar JIS, dan raih kesempatan wawancara dengan perusahaan Jepang terkemuka hari ini.
+          Jangan tunda lagi. Mulai bangun fondasi bahasa, susun Rirekisho
+          standar JIS, dan raih kesempatan wawancara dengan perusahaan Jepang
+          terkemuka hari ini.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
@@ -42,7 +44,10 @@ export function CtaBannerSection() {
             variant="primary"
             className="bg-red-600 hover:bg-red-500 text-white font-bold px-8 py-4 text-base shadow-xl shadow-red-900/30 w-full sm:w-auto"
           >
-            <Link to="/register" className="inline-flex items-center justify-center gap-2">
+            <Link
+              to="/register"
+              className="inline-flex items-center justify-center gap-2"
+            >
               <span>Daftar Akun Kandidat Gratis</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -54,9 +59,7 @@ export function CtaBannerSection() {
             variant="outline"
             className="border-slate-700 bg-slate-800/80 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold px-6 py-4 text-base w-full sm:w-auto"
           >
-            <Link to="/student/courses">
-              Pelajari Modul Kurikulum
-            </Link>
+            <Link to="/student/courses">Pelajari Modul Kurikulum</Link>
           </Button>
         </div>
 

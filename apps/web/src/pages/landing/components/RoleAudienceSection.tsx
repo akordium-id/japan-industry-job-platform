@@ -69,7 +69,8 @@ const ROLES_DATA = [
 
 export function RoleAudienceSection() {
   const [activeTab, setActiveTab] = useState("candidate");
-  const currentRole = ROLES_DATA.find((r) => r.id === activeTab) ?? ROLES_DATA[0]!;
+  const currentRole =
+    ROLES_DATA.find((r) => r.id === activeTab) ?? ROLES_DATA[0]!;
   const IconComponent = currentRole.icon;
 
   return (
@@ -86,7 +87,8 @@ export function RoleAudienceSection() {
             Satu Platform, Solusi untuk Seluruh Pemangku Kepentingan
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600">
-            JIJP menyatukan pencari kerja berkualitas, korporasi pemberi kerja di Jepang, dan para ahli industri dalam satu alur terintegrasi.
+            JIJP menyatukan pencari kerja berkualitas, korporasi pemberi kerja
+            di Jepang, dan para ahli industri dalam satu alur terintegrasi.
           </p>
         </div>
 
@@ -106,7 +108,9 @@ export function RoleAudienceSection() {
                       : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                   }`}
                 >
-                  <RoleIcon className={`w-4 h-4 ${isSelected ? "text-red-400" : "text-slate-500"}`} />
+                  <RoleIcon
+                    className={`w-4 h-4 ${isSelected ? "text-red-400" : "text-slate-500"}`}
+                  />
                   <span>{role.label}</span>
                 </button>
               );
@@ -136,7 +140,10 @@ export function RoleAudienceSection() {
               {/* Benefits checklist */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                 {currentRole.benefits.map((b, idx) => (
-                  <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
+                  <div
+                    key={idx}
+                    className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700"
+                  >
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <span className="font-medium leading-relaxed">{b}</span>
                   </div>
@@ -144,7 +151,10 @@ export function RoleAudienceSection() {
               </div>
 
               <Button asChild size="lg" variant="primary" className="font-bold">
-                <Link to={currentRole.ctaLink} className="inline-flex items-center gap-2">
+                <Link
+                  to={currentRole.ctaLink}
+                  className="inline-flex items-center gap-2"
+                >
                   <span>{currentRole.ctaText}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -161,21 +171,31 @@ export function RoleAudienceSection() {
                 <div className="space-y-4 text-xs">
                   <div className="p-4 rounded-xl bg-slate-800/80 border border-slate-700/80">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-semibold text-slate-300">Standar Kompetensi</span>
-                      <span className="text-emerald-400 font-bold">100% Verified</span>
+                      <span className="font-semibold text-slate-300">
+                        Standar Kompetensi
+                      </span>
+                      <span className="text-emerald-400 font-bold">
+                        100% Verified
+                      </span>
                     </div>
                     <p className="text-slate-400 leading-relaxed">
-                      Memastikan kesiapan bahasa, kesopanan etika bisnis (Keigo), dan pemahaman keselamatan kerja (5S).
+                      Memastikan kesiapan bahasa, kesopanan etika bisnis
+                      (Keigo), dan pemahaman keselamatan kerja (5S).
                     </p>
                   </div>
 
                   <div className="p-4 rounded-xl bg-slate-800/80 border border-slate-700/80">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-semibold text-slate-300">Jaminan Kemitraan</span>
-                      <span className="text-sky-400 font-bold">Resmi Bilateral</span>
+                      <span className="font-semibold text-slate-300">
+                        Jaminan Kemitraan
+                      </span>
+                      <span className="text-sky-400 font-bold">
+                        Resmi Bilateral
+                      </span>
                     </div>
                     <p className="text-slate-400 leading-relaxed">
-                      Sinergi langsung antara institusi pendidikan Indonesia dengan konsorsium industri Jepang.
+                      Sinergi langsung antara institusi pendidikan Indonesia
+                      dengan konsorsium industri Jepang.
                     </p>
                   </div>
                 </div>

@@ -59,7 +59,9 @@ export function AlumniStoriesSection() {
             Dari Indonesia Menuju Pusat Industri Jepang
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600">
-            Dengar langsung pengalaman rekan-rekanmu yang telah menyelesaikan program persiapan JIJP dan kini membangun karier cemerlang di berbagai prefektur Jepang.
+            Dengar langsung pengalaman rekan-rekanmu yang telah menyelesaikan
+            program persiapan JIJP dan kini membangun karier cemerlang di
+            berbagai prefektur Jepang.
           </p>
         </div>
 
@@ -86,9 +88,7 @@ export function AlumniStoriesSection() {
                     <div className="font-bold text-slate-900 text-sm">
                       {story.name}
                     </div>
-                    <div className="text-xs text-slate-600">
-                      {story.role}
-                    </div>
+                    <div className="text-xs text-slate-600">{story.role}</div>
                     <div className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
                       <Building2 className="w-3 h-3 text-slate-400" />
                       <span>{story.company}</span>
@@ -119,13 +119,18 @@ export function AlumniStoriesSection() {
                 <span>Senior Mentor Network • シニアメンタープログラム</span>
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">
-                &ldquo;Karakter dan pemahaman etika kerja adalah kunci keberhasilan talenta global di Jepang.&rdquo;
+                &ldquo;Karakter dan pemahaman etika kerja adalah kunci
+                keberhasilan talenta global di Jepang.&rdquo;
               </h3>
               <p className="text-slate-300 text-sm leading-relaxed mb-4">
-                Para kandidat JIJP mendapatkan bimbingan tatap muka langsung secara daring dengan mentor senior purnatugas korporasi global Jepang seperti Toyota, Panasonic, dan Nippon Steel untuk memahami ekspektasi kerja sebelum menginjakkan kaki di Jepang.
+                Para kandidat JIJP mendapatkan bimbingan tatap muka langsung
+                secara daring dengan mentor senior purnatugas korporasi global
+                Jepang seperti Toyota, Panasonic, dan Nippon Steel untuk
+                memahami ekspektasi kerja sebelum menginjakkan kaki di Jepang.
               </p>
               <div className="text-xs text-slate-400 font-mono">
-                — Yamamoto Kenji (山本 健二), Senior Industry Mentor (Retired — Toyota Motor Corporation)
+                — Yamamoto Kenji (山本 健二), Senior Industry Mentor (Retired —
+                Toyota Motor Corporation)
               </div>
             </div>
 
@@ -137,7 +142,8 @@ export function AlumniStoriesSection() {
                 Executive Industry Mentorship
               </div>
               <div className="text-xs text-slate-400">
-                Setiap kandidat tahap 3 didampingi mentor berpengalaman &gt;25 tahun di industri Jepang.
+                Setiap kandidat tahap 3 didampingi mentor berpengalaman &gt;25
+                tahun di industri Jepang.
               </div>
             </div>
           </div>

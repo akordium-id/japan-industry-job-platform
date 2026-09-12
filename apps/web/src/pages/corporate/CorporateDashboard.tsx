@@ -202,7 +202,6 @@ export default function CorporateDashboard() {
     useScoutCandidates();
   const { data: jobsResponse } = useJobs();
 
-
   const [search, setSearch] = useState("");
   const [jlptFilter, setJlptFilter] = useState<"All" | "N3" | "N4" | "N5">(
     "All",
@@ -630,8 +629,8 @@ export default function CorporateDashboard() {
                 fontSize: "var(--text-sm)",
               }}
             >
-              Generate JIS-standard Rirekisho (履歴書) PDF from a candidate&apos;s
-              profile.
+              Generate JIS-standard Rirekisho (履歴書) PDF from a
+              candidate&apos;s profile.
             </p>
           </div>
           <select

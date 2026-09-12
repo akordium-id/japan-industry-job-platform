@@ -110,24 +110,32 @@ export function FeaturedJobsSection() {
   const { data: apiData } = useJobs({ limit: 6 });
 
   // Map API jobs if available, otherwise use showcase jobs
-  const liveJobs = (apiData?.jobs && apiData.jobs.length > 0)
-    ? apiData.jobs.map((j: Job) => ({
-        id: j.id,
-        title: j.title,
-        titleJp: j.title_jp || "日本企業公募ポジション",
-        companyName: j.company_name || "Mitra Industri Resmi JIJP",
-        location: j.location || "Japan (全国)",
-        salaryRange: j.salary_range || "¥240,000 – ¥320,000 / bln",
-        minJlpt: j.min_jlpt || "N3",
-        specialization: j.specialization || "Engineering",
-        employmentType: j.employment_type === "fulltime" ? "Full-Time" : j.employment_type === "contract" ? "Contract" : "Internship",
-        isHot: false,
-      }))
-    : SHOWCASE_JOBS;
+  const liveJobs =
+    apiData?.jobs && apiData.jobs.length > 0
+      ? apiData.jobs.map((j: Job) => ({
+          id: j.id,
+          title: j.title,
+          titleJp: j.title_jp || "日本企業公募ポジション",
+          companyName: j.company_name || "Mitra Industri Resmi JIJP",
+          location: j.location || "Japan (全国)",
+          salaryRange: j.salary_range || "¥240,000 – ¥320,000 / bln",
+          minJlpt: j.min_jlpt || "N3",
+          specialization: j.specialization || "Engineering",
+          employmentType:
+            j.employment_type === "fulltime"
+              ? "Full-Time"
+              : j.employment_type === "contract"
+                ? "Contract"
+                : "Internship",
+          isHot: false,
+        }))
+      : SHOWCASE_JOBS;
 
   const filteredJobs = liveJobs.filter((job) => {
     if (activeCategory === "all") return true;
-    return job.specialization.toLowerCase().includes(activeCategory.toLowerCase());
+    return job.specialization
+      .toLowerCase()
+      .includes(activeCategory.toLowerCase());
   });
 
   const getJlptBadgeVariant = (level: string) => {
@@ -155,17 +163,26 @@ export function FeaturedJobsSection() {
               <Sparkles className="w-3.5 h-3.5 text-red-600" />
               <span>Peluang Karier Aktif</span>
               <span>•</span>
-              <span className="font-normal font-mono">求人情報ピックアップ</span>
+              <span className="font-normal font-mono">
+                求人情報ピックアップ
+              </span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
               Lowongan Pilihan di Industri Terkemuka Jepang
             </h2>
             <p className="mt-3 text-base text-slate-600 max-w-2xl">
-              Seluruh lowongan telah diverifikasi kelayakan kontrak kerjanya, standar upah minimum prefektur, serta ketersediaan fasilitas tempat tinggal.
+              Seluruh lowongan telah diverifikasi kelayakan kontrak kerjanya,
+              standar upah minimum prefektur, serta ketersediaan fasilitas
+              tempat tinggal.
             </p>
           </div>
 
-          <Button asChild variant="outline" size="md" className="shrink-0 self-start md:self-auto font-semibold">
+          <Button
+            asChild
+            variant="outline"
+            size="md"
+            className="shrink-0 self-start md:self-auto font-semibold"
+          >
             <Link to="/student/jobs" className="inline-flex items-center gap-2">
               <Search className="w-4 h-4" />
               <span>Lihat Semua Lowongan</span>
@@ -203,7 +220,9 @@ export function FeaturedJobsSection() {
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <span className="text-xs font-medium text-slate-500 flex items-center gap-1.5">
                     <Building2 className="w-3.5 h-3.5 text-slate-400" />
-                    <span className="truncate max-w-[160px]">{job.companyName}</span>
+                    <span className="truncate max-w-[160px]">
+                      {job.companyName}
+                    </span>
                   </span>
                   <Badge variant={getJlptBadgeVariant(job.minJlpt)} size="sm">
                     JLPT {job.minJlpt}
@@ -222,11 +241,15 @@ export function FeaturedJobsSection() {
                 <div className="space-y-2 mb-5 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
                   <div className="flex items-center gap-2 text-slate-600">
                     <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-                    <span className="font-medium text-slate-800">{job.location}</span>
+                    <span className="font-medium text-slate-800">
+                      {job.location}
+                    </span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-600">
                     <Coins className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span className="font-semibold text-slate-900">{job.salaryRange}</span>
+                    <span className="font-semibold text-slate-900">
+                      {job.salaryRange}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -236,8 +259,16 @@ export function FeaturedJobsSection() {
                 <span className="text-[11px] font-medium text-slate-500 truncate">
                   {job.employmentType}
                 </span>
-                <Button asChild variant="ghost" size="sm" className="text-red-600 hover:text-red-700 font-semibold p-0">
-                  <Link to="/student/jobs" className="inline-flex items-center gap-1">
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="text-red-600 hover:text-red-700 font-semibold p-0"
+                >
+                  <Link
+                    to="/student/jobs"
+                    className="inline-flex items-center gap-1"
+                  >
                     <span>Lamar</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
@@ -251,7 +282,10 @@ export function FeaturedJobsSection() {
         <div className="mt-12 text-center">
           <p className="text-xs text-slate-500">
             Perusahaan Anda butuh talenta industri bersertifikasi?{" "}
-            <Link to="/corporate" className="text-red-600 hover:underline font-semibold">
+            <Link
+              to="/corporate"
+              className="text-red-600 hover:underline font-semibold"
+            >
               Pasang Lowongan & Akses Talent Scout →
             </Link>
           </p>

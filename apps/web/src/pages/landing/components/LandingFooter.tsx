@@ -25,7 +25,9 @@ export function LandingFooter() {
             </Link>
 
             <p className="text-slate-400 leading-relaxed max-w-sm">
-              Ekosistem pra-migrasi terpadu untuk talenta Indonesia menuju industri Jepang — dari fondasi bahasa, verifikasi dokumen aman, kurasi AI Smart Matching, hingga penempatan resmi.
+              Ekosistem pra-migrasi terpadu untuk talenta Indonesia menuju
+              industri Jepang — dari fondasi bahasa, verifikasi dokumen aman,
+              kurasi AI Smart Matching, hingga penempatan resmi.
             </p>
 
             <div className="text-[11px] font-mono text-slate-500">
@@ -51,27 +53,42 @@ export function LandingFooter() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <a href="#pathway" className="hover:text-white transition-colors">
+                <a
+                  href="#pathway"
+                  className="hover:text-white transition-colors"
+                >
                   The Pathway to Japan
                 </a>
               </li>
               <li>
-                <Link to="/student/courses" className="hover:text-white transition-colors">
+                <Link
+                  to="/student/courses"
+                  className="hover:text-white transition-colors"
+                >
                   Kurikulum Bahasa & Budaya
                 </Link>
               </li>
               <li>
-                <Link to="/student/cv" className="hover:text-white transition-colors">
+                <Link
+                  to="/student/cv"
+                  className="hover:text-white transition-colors"
+                >
                   Rirekisho Format JIS
                 </Link>
               </li>
               <li>
-                <Link to="/student/vault" className="hover:text-white transition-colors">
+                <Link
+                  to="/student/vault"
+                  className="hover:text-white transition-colors"
+                >
                   Brankas Berkas Terenkripsi
                 </Link>
               </li>
               <li>
-                <Link to="/student/calendar" className="hover:text-white transition-colors">
+                <Link
+                  to="/student/calendar"
+                  className="hover:text-white transition-colors"
+                >
                   Jadwal Sesi Mentoring
                 </Link>
               </li>
@@ -85,22 +102,34 @@ export function LandingFooter() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/student/jobs" className="hover:text-white transition-colors">
+                <Link
+                  to="/student/jobs"
+                  className="hover:text-white transition-colors"
+                >
                   Papan Lowongan Kerja
                 </Link>
               </li>
               <li>
-                <Link to="/student/jobs?spec=Engineering" className="hover:text-white transition-colors">
+                <Link
+                  to="/student/jobs?spec=Engineering"
+                  className="hover:text-white transition-colors"
+                >
                   Teknik & Otomasi Manufaktur
                 </Link>
               </li>
               <li>
-                <Link to="/student/jobs?spec=IT" className="hover:text-white transition-colors">
+                <Link
+                  to="/student/jobs?spec=IT"
+                  className="hover:text-white transition-colors"
+                >
                   Software & Sistem Cloud
                 </Link>
               </li>
               <li>
-                <Link to="/career" className="hover:text-white transition-colors">
+                <Link
+                  to="/career"
+                  className="hover:text-white transition-colors"
+                >
                   Jenjang Karier Alumni
                 </Link>
               </li>
@@ -114,17 +143,26 @@ export function LandingFooter() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/corporate" className="hover:text-white transition-colors">
+                <Link
+                  to="/corporate"
+                  className="hover:text-white transition-colors"
+                >
                   Portal Rekrutmen (企業ポータル)
                 </Link>
               </li>
               <li>
-                <Link to="/corporate/jobs" className="hover:text-white transition-colors">
+                <Link
+                  to="/corporate/jobs"
+                  className="hover:text-white transition-colors"
+                >
                   Kelola Lowongan Perusahaan
                 </Link>
               </li>
               <li>
-                <Link to="/corporate/scout" className="hover:text-white transition-colors">
+                <Link
+                  to="/corporate/scout"
+                  className="hover:text-white transition-colors"
+                >
                   AI Talent Scout Engine
                 </Link>
               </li>
@@ -140,7 +178,8 @@ export function LandingFooter() {
         {/* Bottom divider & copyright */}
         <div className="mt-12 pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400">
           <div>
-            © {new Date().getFullYear()} {BRAND_NAME} ({BRAND_TAGLINE}). All rights reserved.
+            © {new Date().getFullYear()} {BRAND_NAME} ({BRAND_TAGLINE}). All
+            rights reserved.
           </div>
 
           <div className="flex items-center gap-6">
