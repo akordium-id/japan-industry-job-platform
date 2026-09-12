@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ChevronDown, Sparkles } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
 import { loginSchema, type LoginFormData, useLoginMutation } from "@/api/hooks";
@@ -11,6 +12,7 @@ export default function Login() {
   const [searchParams] = useSearchParams();
   const [errorMsg, setErrorMsg] = useState("");
   const [noticeMsg, setNoticeMsg] = useState("");
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
   const navigate = useNavigate();
   const { user, isAuthenticated, isLoading } = useAuth();
 
@@ -278,129 +280,157 @@ export default function Login() {
           <div
             style={{
               marginTop: "var(--space-6)",
-              paddingTop: "var(--space-4)",
+              paddingTop: "var(--space-3)",
               borderTop: "1px solid var(--color-border)",
             }}
           >
-            <div
+            <button
+              type="button"
+              onClick={() => setIsDemoOpen((prev) => !prev)}
+              aria-expanded={isDemoOpen}
               style={{
+                width: "100%",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                marginBottom: "var(--space-2)",
+                padding: "6px 4px",
+                background: "transparent",
+                border: "none",
+                borderRadius: "var(--radius-md)",
+                cursor: "pointer",
+                marginBottom: isDemoOpen ? "var(--space-3)" : 0,
+                transition: "opacity 0.15s ease",
               }}
             >
-              <span
-                style={{
-                  fontSize: "var(--text-xs)",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                  color: "var(--color-text-secondary)",
-                }}
-              >
-                Demo Quick-Login
-              </span>
-              <span
-                style={{
-                  fontSize: 10,
-                  padding: "2px 6px",
-                  borderRadius: "var(--radius-sm)",
-                  background: "var(--color-info-soft, #e0f2fe)",
-                  color: "var(--color-info, #0284c7)",
-                  fontWeight: 600,
-                }}
-              >
-                Reset 02:00 WIB
-              </span>
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(2, 1fr)",
-                gap: "var(--space-2)",
-              }}
-            >
-              {[
-                {
-                  role: "Admin",
-                  email: "admin@jijp.id",
-                  desc: "Verifikasi Dokumen",
-                },
-                {
-                  role: "Corporate",
-                  email: "corporate@chubu-precision.jp",
-                  desc: "Chubu Precision HR",
-                },
-                {
-                  role: "Kandidat",
-                  email: "budi.santoso@student.jijp.id",
-                  desc: "Budi Santoso (N3)",
-                },
-                {
-                  role: "Alumni",
-                  email: "rina.kusuma@alumni.jijp.id",
-                  desc: "Career Timeline",
-                },
-                {
-                  role: "Educator",
-                  email: "sari.sensei@jijp.id",
-                  desc: "Instruktur N3",
-                },
-              ].map((acc) => (
-                <button
-                  key={acc.role}
-                  type="button"
-                  onClick={() => {
-                    setValue("email", acc.email);
-                    setValue("password", "password123");
-                  }}
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <Sparkles size={14} style={{ color: "var(--color-accent)" }} />
+                <span
                   style={{
-                    padding: "6px 8px",
-                    textAlign: "left",
-                    background: "var(--color-bg)",
-                    border: "1px solid var(--color-border)",
-                    borderRadius: "var(--radius-md)",
-                    cursor: "pointer",
-                    transition: "all 0.15s ease",
+                    fontSize: "var(--text-xs)",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                    color: "var(--color-text-secondary)",
                   }}
-                  title={`Klik untuk mengisi akun ${acc.email}`}
                 >
-                  <div
-                    style={{
-                      fontSize: "var(--text-xs)",
-                      fontWeight: 600,
-                      color: "var(--color-accent)",
-                    }}
-                  >
-                    {acc.role}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 11,
-                      color: "var(--color-text-tertiary)",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                    }}
-                  >
-                    {acc.desc}
-                  </div>
-                </button>
-              ))}
-            </div>
-            <p
-              style={{
-                fontSize: 11,
-                color: "var(--color-text-tertiary)",
-                marginTop: "var(--space-2)",
-                lineHeight: 1.3,
-                textAlign: "center",
-              }}
-            >
-              Setiap pembaruan data demo akan otomatis di-reset ke initial state
-              setiap pukul 02:00 WIB.
-            </p>
+                  Demo Quick-Login
+                </span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <span
+                  style={{
+                    fontSize: 10,
+                    padding: "2px 6px",
+                    borderRadius: "var(--radius-sm)",
+                    background: "var(--color-info-soft, #e0f2fe)",
+                    color: "var(--color-info, #0284c7)",
+                    fontWeight: 600,
+                  }}
+                >
+                  Reset 02:00 WIB
+                </span>
+                <ChevronDown
+                  size={15}
+                  style={{
+                    color: "var(--color-text-tertiary)",
+                    transform: isDemoOpen ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.2s ease",
+                  }}
+                />
+              </div>
+            </button>
+
+            {isDemoOpen && (
+              <>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2, 1fr)",
+                    gap: "var(--space-2)",
+                  }}
+                >
+                  {[
+                    {
+                      role: "Admin",
+                      email: "admin@jijp.id",
+                      desc: "Verifikasi Dokumen",
+                    },
+                    {
+                      role: "Corporate",
+                      email: "corporate@chubu-precision.jp",
+                      desc: "Chubu Precision HR",
+                    },
+                    {
+                      role: "Kandidat",
+                      email: "budi.santoso@student.jijp.id",
+                      desc: "Budi Santoso (N3)",
+                    },
+                    {
+                      role: "Alumni",
+                      email: "rina.kusuma@alumni.jijp.id",
+                      desc: "Career Timeline",
+                    },
+                    {
+                      role: "Educator",
+                      email: "sari.sensei@jijp.id",
+                      desc: "Instruktur N3",
+                    },
+                  ].map((acc) => (
+                    <button
+                      key={acc.role}
+                      type="button"
+                      onClick={() => {
+                        setValue("email", acc.email);
+                        setValue("password", "password123");
+                      }}
+                      style={{
+                        padding: "6px 8px",
+                        textAlign: "left",
+                        background: "var(--color-bg)",
+                        border: "1px solid var(--color-border)",
+                        borderRadius: "var(--radius-md)",
+                        cursor: "pointer",
+                        transition: "all 0.15s ease",
+                      }}
+                      title={`Klik untuk mengisi akun ${acc.email}`}
+                    >
+                      <div
+                        style={{
+                          fontSize: "var(--text-xs)",
+                          fontWeight: 600,
+                          color: "var(--color-accent)",
+                        }}
+                      >
+                        {acc.role}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: 11,
+                          color: "var(--color-text-tertiary)",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {acc.desc}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+                <p
+                  style={{
+                    fontSize: 11,
+                    color: "var(--color-text-tertiary)",
+                    marginTop: "var(--space-2)",
+                    lineHeight: 1.3,
+                    textAlign: "center",
+                  }}
+                >
+                  Setiap pembaruan data demo akan otomatis di-reset ke initial
+                  state setiap pukul 02:00 WIB.
+                </p>
+              </>
+            )}
           </div>
         </div>
       </div>
