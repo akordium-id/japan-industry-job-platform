@@ -516,64 +516,44 @@ export default function Landing() {
         </div>
       </section>
 
-      <section id="features" style={{ padding: "var(--space-12) var(--container-px)" }}>
-        <div style={{ maxWidth: "var(--content-max-width)", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "var(--space-8)" }}>
-            <h2>Integrated ecosystem</h2>
-            <p
-              style={{
-                color: "var(--color-text-secondary)",
-                maxWidth: 640,
-                margin: "var(--space-3) auto 0",
-              }}
-            >
-              Every component is designed to take you from zero to work-ready in
-              Japan.
+      <section id="features" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[var(--content-max-width)] mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-widest text-red-600 mb-2 inline-block">
+              Integrated Ecosystem
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Integrated ecosystem
+            </h2>
+            <p className="text-slate-600 mt-3 text-sm sm:text-base leading-relaxed">
+              Every component is designed to take you from zero to work-ready in Japan.
             </p>
           </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-              gap: "var(--space-5)",
-            }}
-          >
+
+          {/* 3 cards in 2 rows on desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f) => {
               const Icon = f.icon;
               return (
                 <div
                   key={f.title}
-                  style={{
-                    background: "var(--color-surface)",
-                    border: "1px solid var(--color-border)",
-                    borderRadius: "var(--radius-lg)",
-                    padding: "var(--space-5)",
-                  }}
+                  className="group relative flex flex-col p-6 rounded-2xl bg-white border border-slate-200/80 hover:border-slate-300 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
                 >
                   <div
+                    className="flex items-center justify-center w-12 h-12 rounded-xl mb-4 transition-transform duration-200 group-hover:scale-105"
                     style={{
-                      width: 44,
-                      height: 44,
-                      borderRadius: "var(--radius-md)",
                       background: "var(--color-surface-2)",
                       color: f.color,
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: "var(--space-3)",
                     }}
                   >
-                    <Icon size={22} />
+                    <Icon className="w-6 h-6" />
                   </div>
-                  <h3
-                    style={{
-                      fontSize: "var(--text-base)",
-                      marginBottom: "var(--space-2)",
-                    }}
-                  >
+                  <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-slate-950 transition-colors">
                     {f.title}
                   </h3>
-                  <p style={{ fontSize: "var(--text-sm)" }}>{f.desc}</p>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    {f.desc}
+                  </p>
                 </div>
               );
             })}
