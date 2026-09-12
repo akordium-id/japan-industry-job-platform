@@ -7,9 +7,6 @@ services:
       MYSQL_DATABASE: ${DB_NAME:-jijp_db}
       MYSQL_USER: ${DB_USER:-jijp_user}
       MYSQL_PASSWORD: ${DB_PASSWORD:-changeme}
-    ports:
-      # Hanya bind ke localhost host untuk keamanan (tidak terbuka langsung ke internet publik)
-      - "${DB_PORT_BIND:-127.0.0.1:3306}:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -59,9 +56,8 @@ services:
       WEBHOOK_SECRET: ${WEBHOOK_SECRET:-}
       SSO_PROVIDER_URL: ${SSO_PROVIDER_URL:-}
       SSO_JWT_PUBLIC_KEY: ${SSO_JWT_PUBLIC_KEY:-}
-    ports:
-      # Hanya bind ke localhost host untuk debugging internal jika diperlukan
-      - "${API_PORT_BIND:-127.0.0.1:3001}:3001"
+    expose:
+      - "3001"
     volumes:
       - uploads_data:/app/apps/api/uploads
     healthcheck:
@@ -76,14 +72,13 @@ services:
       context: .
       dockerfile: docker/Dockerfile.web
       args:
-        # Kosongkan secara default agar request API menggunakan relative URL /api
         VITE_API_URL: ${VITE_API_URL:-}
     restart: unless-stopped
     depends_on:
       api:
         condition: service_healthy
-    ports:
-      - "${PORT_WEB:-80}:80"
+    expose:
+      - "80"
 
 volumes:
   mysql_data:
