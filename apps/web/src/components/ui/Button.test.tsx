@@ -13,4 +13,15 @@ describe("Button Component", () => {
     render(<Button loading>Memuat...</Button>);
     expect(screen.getByRole("button")).toBeDefined();
   });
+
+  it("renders asChild without crashing Slot", () => {
+    render(
+      <Button asChild>
+        <a href="/test">Link Button</a>
+      </Button>,
+    );
+    const link = screen.getByRole("link", { name: "Link Button" });
+    expect(link).toBeDefined();
+    expect(link.getAttribute("href")).toBe("/test");
+  });
 });
