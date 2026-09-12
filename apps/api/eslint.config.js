@@ -5,4 +5,10 @@ export default [
   {
     ignores: ["dist/**"],
   },
+  {
+    files: ["src/db/**/*.ts"],
+    rules: {
+      "no-console": "off",
+    },
+  },
 ];

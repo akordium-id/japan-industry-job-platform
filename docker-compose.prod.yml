@@ -8,7 +8,8 @@ services:
       MYSQL_USER: ${DB_USER:-jijp_user}
       MYSQL_PASSWORD: ${DB_PASSWORD:-changeme}
     ports:
-      - "3306:3306"
+      # Hanya bind ke localhost host untuk keamanan (tidak terbuka langsung ke internet publik)
+      - "${DB_PORT_BIND:-127.0.0.1:3306}:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -37,25 +38,53 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-    env_file:
-      - ./apps/api/.env
-    ports:
-      - "3001:3001"
     environment:
       NODE_ENV: production
-    command: node dist/index.js
+      PORT: 3001
+      DB_HOST: ${DB_HOST:-mysql}
+      DB_PORT: ${DB_PORT:-3306}
+      DB_NAME: ${DB_NAME:-jijp_db}
+      DB_USER: ${DB_USER:-jijp_user}
+      DB_PASSWORD: ${DB_PASSWORD:-changeme}
+      SESSION_SECRET: ${SESSION_SECRET:-changeme_generate_strong_secret}
+      CORS_ORIGINS: ${CORS_ORIGINS:-}
+      UPLOAD_DIR: ./uploads
+      MAX_UPLOAD_SIZE_MB: ${MAX_UPLOAD_SIZE_MB:-10}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      MAIL_FROM: ${MAIL_FROM:-}
+      WEBHOOK_URL: ${WEBHOOK_URL:-}
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET:-}
+      SSO_PROVIDER_URL: ${SSO_PROVIDER_URL:-}
+      SSO_JWT_PUBLIC_KEY: ${SSO_JWT_PUBLIC_KEY:-}
+    ports:
+      # Hanya bind ke localhost host untuk debugging internal jika diperlukan
+      - "${API_PORT_BIND:-127.0.0.1:3001}:3001"
+    volumes:
+      - uploads_data:/app/apps/api/uploads
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3001/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
 
   web:
     build:
       context: .
       dockerfile: docker/Dockerfile.web
       args:
-        VITE_API_URL: ${VITE_API_URL:-http://localhost:3001}
+        # Kosongkan secara default agar request API menggunakan relative URL /api
+        VITE_API_URL: ${VITE_API_URL:-}
     restart: unless-stopped
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     ports:
-      - "8080:80"
+      - "${PORT_WEB:-80}:80"
 
 volumes:
   mysql_data:
+  uploads_data:

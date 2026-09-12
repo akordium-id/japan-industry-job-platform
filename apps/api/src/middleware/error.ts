@@ -1,8 +1,9 @@
 import type { ErrorRequestHandler } from "express";
 import { ZodError } from "zod";
 
-import { fail } from "../lib/response.js";
 import { HttpError } from "../lib/errors.js";
+import { logger } from "../lib/logger.js";
+import { fail } from "../lib/response.js";
 
 export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   if (err instanceof ZodError) {
@@ -29,7 +30,7 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
     }
   }
 
-  console.error("[api] unhandled error:", err);
+  logger.error({ err }, "[api] unhandled error");
 
   res.status(500).json(fail("Internal Server Error", "INTERNAL_ERROR"));
 };

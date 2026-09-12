@@ -1,17 +1,19 @@
 import "dotenv/config";
-import { createServer } from "./server.js";
+
 import { env } from "./config/env.js";
+import { logger } from "./lib/logger.js";
+import { createServer } from "./server.js";
 
 const app = createServer();
 
 app.listen(env.PORT, () => {
-  console.log(
+  logger.info(
     `[api] listening on http://localhost:${env.PORT} (${env.NODE_ENV})`,
   );
 });
 
 const shutdown = (signal: string) => {
-  console.log(`[api] received ${signal}, closing`);
+  logger.info(`[api] received ${signal}, closing`);
   process.exit(0);
 };
 

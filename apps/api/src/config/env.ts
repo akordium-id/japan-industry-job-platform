@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { logger } from "../lib/logger.js";
+
 const envSchema = z.object({
   NODE_ENV: z
     .enum(["development", "test", "production"])
@@ -37,8 +39,10 @@ const envSchema = z.object({
 const parsed = envSchema.safeParse(process.env);
 
 if (!parsed.success) {
-  console.error("[api] invalid environment variables:");
-  console.error(parsed.error.flatten().fieldErrors);
+  logger.error(
+    parsed.error.flatten().fieldErrors,
+    "[api] invalid environment variables",
+  );
   throw new Error("Invalid environment configuration");
 }
 

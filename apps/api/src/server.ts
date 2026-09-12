@@ -1,5 +1,6 @@
 import cors from "cors";
 import express, { type Express } from "express";
+import "express-async-errors";
 import session from "express-session";
 import helmet from "helmet";
 
@@ -36,7 +37,7 @@ const origins = env.CORS_ORIGINS.split(",")
 export function createServer(): Express {
   const app = express();
 
-  app.set("trust proxy", 1);
+  app.set("trust proxy", true);
 
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(express.json({ limit: "1mb" }));

@@ -4,6 +4,8 @@ import axios from "axios";
 import nodemailer, { type Transporter } from "nodemailer";
 
 import { env } from "../config/env.js";
+import { getPool } from "../db/pool.js";
+import { logger } from "../lib/logger.js";
 import {
   countUnread,
   findByUser,
@@ -13,7 +15,6 @@ import {
   type NotificationRow,
 } from "../repositories/notifications.repository.js";
 import { findAdmins, type UserRow } from "../repositories/users.repository.js";
-import { getPool } from "../db/pool.js";
 
 let mailer: Transporter | null | undefined;
 function getMailer(): Transporter | null {
@@ -99,11 +100,11 @@ export async function notifyUser(input: NotifyInput): Promise<void> {
           timeout: 3000,
         })
         .catch((e: Error) => {
-          console.warn("[webhook error]", e.message);
+          logger.warn({ err: e }, `[webhook error] ${e.message}`);
         });
     }
   } catch (err) {
-    console.warn("[notify error]", (err as Error).message);
+    logger.warn({ err }, `[notify error] ${(err as Error).message}`);
   }
 }
 
@@ -122,7 +123,7 @@ export async function notifyAdminsDocumentSubmitted(input: {
       });
     }
   } catch (err) {
-    console.error("Failed to notify admins of document upload:", err);
+    logger.error({ err }, "Failed to notify admins of document upload");
   }
 }
 
