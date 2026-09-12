@@ -13,6 +13,7 @@
     "test": "vitest run",
     "test:e2e": "echo \"placeholder e2e\" && exit 0",
     "seed": "tsx src/db/seed.ts",
+    "reset-demo": "tsx src/db/reset.ts",
     "migrate": "node dist/db/migrate.js",
     "clean": "rm -rf dist"
   },

@@ -118,6 +118,121 @@ jobsRouter.post("/", requireAuth, async (req: Request, res: Response) => {
   res.status(201).json(ok({ id, ...parsed.data }));
 });
 
+jobsRouter.get(
+  "/scout-candidates",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const specialization =
+      typeof req.query.specialization === "string"
+        ? req.query.specialization
+        : undefined;
+    const minJlpt =
+      typeof req.query.minJlpt === "string" ? req.query.minJlpt : undefined;
+    const rows = await findScoutCandidates({ specialization, minJlpt });
+    res.json(ok({ candidates: rows.map(toUserDto) }));
+  },
+);
+
+jobsRouter.get("/:id", async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id) || id <= 0) {
+    throw badRequest("ID lowongan tidak valid");
+  }
+  const job = await findJobById(id);
+  if (!job) throw notFound("Lowongan tidak ditemukan");
+  res.json(ok({ job, ...job }));
+});
+
+jobsRouter.put("/:id", requireAuth, async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const job = await findJobById(id);
+  if (!job) throw notFound("Lowongan tidak ditemukan");
+  if (
+    job.posted_by !== req.session.user!.id &&
+    req.session.user!.role !== "admin"
+  ) {
+    throw forbidden("Akses ditolak");
+  }
+  const body = req.body as Record<string, unknown>;
+  const title = typeof body.title === "string" ? body.title : job.title;
+  const titleJp =
+    typeof body.titleJp === "string" ? body.titleJp : job.title_jp;
+  const description =
+    typeof body.description === "string" ? body.description : job.description;
+  const requirements =
+    typeof body.requirements === "string"
+      ? body.requirements
+      : job.requirements;
+  const specialization =
+    typeof body.specialization === "string"
+      ? body.specialization
+      : job.specialization;
+  const minJlpt =
+    typeof body.minJlpt === "string" ? body.minJlpt : job.min_jlpt;
+  const location =
+    typeof body.location === "string" ? body.location : job.location;
+  const employmentType =
+    typeof body.employmentType === "string"
+      ? body.employmentType
+      : job.employment_type;
+  const salaryRange =
+    typeof body.salaryRange === "string" ? body.salaryRange : job.salary_range;
+
+  const { getPool } = await import("../db/pool.js");
+  await getPool().query(
+    `UPDATE job_postings SET
+       title = ?, title_jp = ?, description = ?, requirements = ?,
+       specialization = ?, min_jlpt = ?, location = ?, employment_type = ?,
+       salary_range = ?, updated_at = NOW(), updated_by = ?
+     WHERE id = ?`,
+    [
+      title,
+      titleJp,
+      description,
+      requirements,
+      specialization,
+      minJlpt,
+      location,
+      employmentType,
+      salaryRange,
+      req.session.user!.id,
+      id,
+    ],
+  );
+  const updated = await findJobById(id);
+  res.json(ok({ job: updated, ...updated }, "Lowongan berhasil diperbarui"));
+});
+
+jobsRouter.post(
+  "/:id/close",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    const job = await findJobById(id);
+    if (!job) throw notFound("Lowongan tidak ditemukan");
+    if (
+      job.posted_by !== req.session.user!.id &&
+      req.session.user!.role !== "admin"
+    ) {
+      throw forbidden("Akses ditolak");
+    }
+    const { getPool } = await import("../db/pool.js");
+    await getPool().query(
+      "UPDATE job_postings SET is_active = 0, updated_at = NOW(), updated_by = ? WHERE id = ?",
+      [req.session.user!.id, id],
+    );
+    res.json(ok({}, "Lowongan berhasil ditutup"));
+  },
+);
+
+jobsRouter.post(
+  "/:id/scout",
+  requireAuth,
+  async (req: Request, res: Response) => {
+    await handleScout(req, res, Number(req.params.id));
+  },
+);
+
 jobsRouter.delete("/:id", requireAuth, async (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const job = await findJobById(id);

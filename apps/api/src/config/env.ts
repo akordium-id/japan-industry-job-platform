@@ -34,6 +34,19 @@ const envSchema = z.object({
   RATE_LIMIT_AUTH_PER_MIN: z.coerce.number().int().positive().default(15),
   RATE_LIMIT_UPLOAD_PER_15MIN: z.coerce.number().int().positive().default(20),
   RATE_LIMIT_CV_PER_MIN: z.coerce.number().int().positive().default(10),
+
+  DEMO_AUTO_RESET_ENABLED: z
+    .preprocess(
+      (val) =>
+        val === undefined
+          ? true
+          : val === "true" || val === "1" || val === true,
+      z.boolean(),
+    )
+    .default(true),
+  DEMO_RESET_HOUR: z.coerce.number().int().min(0).max(23).default(2),
+  DEMO_RESET_TIMEZONE: z.string().default("Asia/Jakarta"),
+  DEMO_RESET_SECRET: z.string().optional(),
 });
 
 const parsed = envSchema.safeParse(process.env);

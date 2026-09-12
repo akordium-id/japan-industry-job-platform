@@ -1,6 +1,7 @@
 import mysql from "mysql2/promise";
 
 import { env } from "../config/env.js";
+
 import { runSeed } from "./seed.js";
 import { closePool } from "./pool.js";
 

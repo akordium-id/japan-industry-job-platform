@@ -72,8 +72,8 @@ async function fetchJson<T>(input: string, init?: RequestInit): Promise<T> {
 
 export const jobApi = {
   listCompanies: () =>
-    fetchJson<{ companies: Company[] }>("/api/jobs/companies").then(
-      (d) => d.companies,
+    fetchJson<Company[] | { companies: Company[] }>("/api/jobs/companies").then(
+      (d) => (Array.isArray(d) ? d : (d.companies ?? [])),
     ),
 
   createCompany: (c: Partial<Company>) =>
@@ -104,19 +104,21 @@ export const jobApi = {
   },
 
   getJob: (id: number) =>
-    fetchJson<{ job: Job }>(`/api/jobs/${id}`).then((d) => d.job),
+    fetchJson<{ job?: Job } & Job>(`/api/jobs/${id}`).then(
+      (d) => d.job ?? (d as Job),
+    ),
 
   createJob: (j: CreateJobPayload) =>
-    fetchJson<{ job: Job }>("/api/jobs", {
+    fetchJson<{ job?: Job } & Job>("/api/jobs", {
       method: "POST",
       body: JSON.stringify(j),
-    }).then((d) => d.job),
+    }).then((d) => d.job ?? (d as Job)),
 
   updateJob: (id: number, j: Partial<Job>) =>
-    fetchJson<{ job: Job }>(`/api/jobs/${id}`, {
+    fetchJson<{ job?: Job } & Job>(`/api/jobs/${id}`, {
       method: "PUT",
       body: JSON.stringify(j),
-    }).then((d) => d.job),
+    }).then((d) => d.job ?? (d as Job)),
 
   closeJob: (id: number) =>
     fetchJson<unknown>(`/api/jobs/${id}/close`, { method: "POST" }),

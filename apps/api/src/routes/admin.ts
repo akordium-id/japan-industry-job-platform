@@ -1,6 +1,9 @@
 import { Router, type Request, type Response } from "express";
 
 import { requireRole } from "../middleware/auth.js";
+import { env } from "../config/env.js";
+import { performDemoReset } from "../services/demoReset.service.js";
+import { getSchedulerStatus } from "../services/scheduler.service.js";
 import {
   countByStatus,
   findPendingWithOwner,
@@ -10,7 +13,7 @@ import {
 import { countActiveJobs } from "../repositories/jobs.repository.js";
 import { countAll } from "../repositories/applications.repository.js";
 import { ok } from "../lib/response.js";
-import { badRequest, notFound } from "../lib/errors.js";
+import { badRequest, notFound, forbidden } from "../lib/errors.js";
 import { findById } from "../repositories/documents.repository.js";
 import { notifyUser } from "../services/notifications.service.js";
 import { findByEmail } from "../repositories/users.repository.js";
@@ -119,5 +122,50 @@ adminRouter.get(
     );
   },
 );
+
+adminRouter.get("/demo-status", async (req: Request, res: Response) => {
+  const secretHeader = req.headers["x-demo-reset-secret"];
+  const isAuthorizedBySecret =
+    env.DEMO_RESET_SECRET && secretHeader === env.DEMO_RESET_SECRET;
+  const isAdmin = req.session?.user?.role === "admin";
+
+  if (!isAdmin && !isAuthorizedBySecret) {
+    throw forbidden("Akses ditolak ke status demo");
+  }
+
+  const scheduler = getSchedulerStatus();
+  res.json(
+    ok({
+      scheduler,
+      serverTime: new Date().toISOString(),
+    }),
+  );
+});
+
+adminRouter.post("/reset-demo", async (req: Request, res: Response) => {
+  const secretHeader = req.headers["x-demo-reset-secret"];
+  const isAuthorizedBySecret =
+    env.DEMO_RESET_SECRET && secretHeader === env.DEMO_RESET_SECRET;
+  const isAdmin = req.session?.user?.role === "admin";
+
+  if (!isAdmin && !isAuthorizedBySecret) {
+    throw forbidden(
+      "Akses ditolak: Hanya admin atau token demo secret yang dapat me-reset demo state",
+    );
+  }
+
+  const triggerBy = isAdmin ? req.session?.user?.name : "SecretTokenAuth";
+  const result = await performDemoReset({
+    reason: `manual_admin_trigger by ${triggerBy}`,
+    triggerByUserId: req.session?.user?.id,
+  });
+
+  res.json(
+    ok(
+      result,
+      `Demo state berhasil di-reset ke initial seeder state. ${result.purgedFilesCount} berkas unggahan telah dibersihkan.`,
+    ),
+  );
+});
 
 void notFound;

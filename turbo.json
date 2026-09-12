@@ -28,6 +28,9 @@
     },
     "clean": {
       "cache": false
+    },
+    "reset-demo": {
+      "cache": false
     }
   }
 }
