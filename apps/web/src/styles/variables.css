@@ -108,7 +108,7 @@
   --sidebar-collapsed-width: 72px;
   --navbar-height: 56px;
   --container-px: var(--space-6);
-  --content-max-width: 1360px;
+  --content-max-width: 1280px;
 
   --z-dropdown: 100;
   --z-modal: 200;

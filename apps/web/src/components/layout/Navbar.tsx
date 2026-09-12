@@ -125,14 +125,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/90 bg-white/95 backdrop-blur-md transition-all">
-      <div
-        style={{
-          maxWidth: "calc(var(--content-max-width) + var(--container-px) * 2)",
-          paddingLeft: "var(--container-px)",
-          paddingRight: "var(--container-px)",
-        }}
-        className="mx-auto flex h-14 md:h-16 items-center justify-between w-full"
-      >
+      <div className="mx-auto flex h-14 md:h-16 items-center justify-between w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Left: Brand logo */}
         <div className="flex items-center gap-8">
           <NavLink
