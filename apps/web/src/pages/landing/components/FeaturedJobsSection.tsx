@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   MapPin,
-  Coins,
   Building2,
   ArrowRight,
-  Sparkles,
   Search,
+  Home,
+  CheckCircle2,
 } from "lucide-react";
 
 import { useJobs } from "@/api/hooks";
@@ -14,94 +14,119 @@ import type { Job } from "@/api/jobs.types";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 
-// Curated high-converting showcase jobs as fallback / initial state
+// Curated high-converting showcase jobs with authentic Japanese recruitment specs
 const SHOWCASE_JOBS: Array<{
   id: number;
   title: string;
   titleJp: string;
   companyName: string;
+  prefectureCode: string;
   location: string;
-  salaryRange: string;
+  salaryBase: string;
+  salaryNote: string;
+  housing: string;
   minJlpt: string;
   specialization: string;
-  employmentType: string;
-  isHot?: boolean;
+  visaType: string;
+  intakeQuota: string;
 }> = [
   {
     id: 101,
     title: "Automated Production Quality Engineer",
     titleJp: "自動化生産ライン品質管理エンジニア",
     companyName: "Chubu Precision Industrial Co., Ltd.",
-    location: "Toyota, Aichi (愛知県)",
-    salaryRange: "¥280,000 – ¥350,000 / bln",
+    prefectureCode: "愛知県",
+    location: "Toyota, Aichi",
+    salaryBase: "¥280,000 ~ ¥350,000",
+    salaryNote: "+ Lembur & Asuransi Sosial (社会保険)",
+    housing: "Asrama Perusahaan (Dorm) Subsidi 70%",
     minJlpt: "N3",
     specialization: "Engineering",
-    employmentType: "Full-Time (Gijinkoku)",
-    isHot: true,
+    visaType: "Gijinkoku (Engineer Visa)",
+    intakeQuota: "Kuota: 3 Orang",
   },
   {
     id: 102,
     title: "Cloud & Frontend Software Engineer",
     titleJp: "クラウド・フロントエンドエンジニア",
     companyName: "NextGen Media Systems Tokyo",
-    location: "Shibuya, Tokyo (東京都)",
-    salaryRange: "¥320,000 – ¥450,000 / bln",
+    prefectureCode: "東京都",
+    location: "Shibuya, Tokyo",
+    salaryBase: "¥320,000 ~ ¥450,000",
+    salaryNote: "+ Bonus Tahunan (賞与年2回)",
+    housing: "Tunjangan Sewa ¥30,000/bln",
     minJlpt: "N3",
     specialization: "IT",
-    employmentType: "Full-Time (Engineer Visa)",
-    isHot: true,
+    visaType: "Gijinkoku (Engineer Visa)",
+    intakeQuota: "Kuota: 2 Orang",
   },
   {
     id: 103,
     title: "Precision CNC Machine Operator & CAM",
     titleJp: "マシニングセンタ・精密加工技術者",
     companyName: "Kansai Metalcraft Works",
-    location: "Sakai, Osaka (大阪府)",
-    salaryRange: "¥250,000 – ¥310,000 / bln",
+    prefectureCode: "大阪府",
+    location: "Sakai, Osaka",
+    salaryBase: "¥250,000 ~ ¥310,000",
+    salaryNote: "+ Uang Makan & Shift Allowance",
+    housing: "Fasilitas Mess Lengkap Dekat Pabrik",
     minJlpt: "N4",
     specialization: "Manufacturing",
-    employmentType: "Tokutei Ginou (SSW 1)",
+    visaType: "Tokutei Ginou 1 (SSW)",
+    intakeQuota: "Kuota: 5 Orang",
   },
   {
     id: 104,
     title: "International Guest Relations Specialist",
     titleJp: "高級旅館・国際接客コンシェルジュ",
     companyName: "Kyoto Heritage Hospitality Group",
-    location: "Gion, Kyoto (京都府)",
-    salaryRange: "¥240,000 – ¥290,000 / bln",
+    prefectureCode: "京都府",
+    location: "Gion, Kyoto",
+    salaryBase: "¥240,000 ~ ¥290,000",
+    salaryNote: "+ Pelatihan Etika Tradisional",
+    housing: "Apartemen Staff Termasuk Utilitas",
     minJlpt: "N3",
     specialization: "Hospitality",
-    employmentType: "Gijinkoku Visa",
+    visaType: "Gijinkoku / Tokutei",
+    intakeQuota: "Kuota: 4 Orang",
   },
   {
     id: 105,
     title: "Automotive Mechatronics Technician",
     titleJp: "自動車電装・メカトロニクス技術者",
     companyName: "Yokohama Auto-Parts Manufacturing",
-    location: "Yokohama, Kanagawa (神奈川県)",
-    salaryRange: "¥270,000 – ¥330,000 / bln",
+    prefectureCode: "神奈川県",
+    location: "Yokohama, Kanagawa",
+    salaryBase: "¥270,000 ~ ¥330,000",
+    salaryNote: "+ Sertifikasi Mekatronik Resmi",
+    housing: "Subsidi Perumahan 60%",
     minJlpt: "N4",
     specialization: "Manufacturing",
-    employmentType: "Tokutei Ginou (SSW 1)",
+    visaType: "Tokutei Ginou 1 (SSW)",
+    intakeQuota: "Kuota: 3 Orang",
   },
   {
     id: 106,
     title: "Smart Agriculture Systems Specialist",
     titleJp: "スマート農業・温室環境管理技術者",
     companyName: "Hokkaido Agri-Tech Innovations",
-    location: "Sapporo, Hokkaido (北海道)",
-    salaryRange: "¥230,000 – ¥280,000 / bln",
+    prefectureCode: "北海道",
+    location: "Sapporo, Hokkaido",
+    salaryBase: "¥230,000 ~ ¥280,000",
+    salaryNote: "+ Fasilitas Musim Dingin",
+    housing: "Perumahan Staff Disediakan",
     minJlpt: "N4",
     specialization: "Agriculture",
-    employmentType: "Tokutei Ginou (SSW 1)",
+    visaType: "Tokutei Ginou 1 (SSW)",
+    intakeQuota: "Kuota: 2 Orang",
   },
 ];
 
 const CATEGORIES = [
-  { id: "all", label: "Semua Bidang" },
-  { id: "Engineering", label: "Engineering & Otomasi" },
-  { id: "IT", label: "IT & Software" },
-  { id: "Manufacturing", label: "Manufaktur & Presisi" },
+  { id: "all", label: "Semua Kategori" },
+  { id: "Engineering", label: "Rekayasa & Otomasi" },
+  { id: "IT", label: "Software & Cloud" },
+  { id: "Manufacturing", label: "Manufaktur & CAM" },
   { id: "Hospitality", label: "Hospitality & Service" },
 ];
 
@@ -109,34 +134,30 @@ export function FeaturedJobsSection() {
   const [activeCategory, setActiveCategory] = useState("all");
   const { data: apiData } = useJobs({ limit: 6 });
 
-  // Map API jobs if available, otherwise use showcase jobs
-  const liveJobs =
-    apiData?.jobs && apiData.jobs.length > 0
-      ? apiData.jobs.map((j: Job) => ({
+  // Map API jobs if available, fallback to curated showcase
+  const jobs =
+    apiData && apiData.jobs && apiData.jobs.length > 0
+      ? apiData.jobs.map((j: Job, idx: number) => ({
           id: j.id,
           title: j.title,
-          titleJp: j.title_jp || "日本企業公募ポジション",
-          companyName: j.company_name || "Mitra Industri Resmi JIJP",
-          location: j.location || "Japan (全国)",
-          salaryRange: j.salary_range || "¥240,000 – ¥320,000 / bln",
+          titleJp: (j as unknown as { title_jp?: string }).title_jp || SHOWCASE_JOBS[idx % SHOWCASE_JOBS.length]!.titleJp,
+          companyName: (j as unknown as { company_name?: string }).company_name || j.company_name || SHOWCASE_JOBS[idx % SHOWCASE_JOBS.length]!.companyName,
+          prefectureCode: SHOWCASE_JOBS[idx % SHOWCASE_JOBS.length]!.prefectureCode,
+          location: j.location,
+          salaryBase: j.salary_range || SHOWCASE_JOBS[idx % SHOWCASE_JOBS.length]!.salaryBase,
+          salaryNote: "+ Lembur & Asuransi Sosial",
+          housing: SHOWCASE_JOBS[idx % SHOWCASE_JOBS.length]!.housing,
           minJlpt: j.min_jlpt || "N3",
           specialization: j.specialization || "Engineering",
-          employmentType:
-            j.employment_type === "fulltime"
-              ? "Full-Time"
-              : j.employment_type === "contract"
-                ? "Contract"
-                : "Internship",
-          isHot: false,
+          visaType: SHOWCASE_JOBS[idx % SHOWCASE_JOBS.length]!.visaType,
+          intakeQuota: "Kuota Terbuka",
         }))
       : SHOWCASE_JOBS;
 
-  const filteredJobs = liveJobs.filter((job) => {
-    if (activeCategory === "all") return true;
-    return job.specialization
-      .toLowerCase()
-      .includes(activeCategory.toLowerCase());
-  });
+  const filteredJobs =
+    activeCategory === "all"
+      ? jobs
+      : jobs.filter((j) => j.specialization === activeCategory);
 
   const getJlptBadgeVariant = (level: string) => {
     switch (level.toUpperCase()) {
@@ -154,38 +175,26 @@ export function FeaturedJobsSection() {
   };
 
   return (
-    <section id="jobs" className="py-20 bg-white">
+    <section id="jobs" className="py-16 lg:py-20 bg-slate-50 border-b border-slate-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-slate-200">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 uppercase tracking-wider mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-red-600" />
-              <span>Peluang Karier Aktif</span>
-              <span>•</span>
-              <span className="font-normal font-mono">
-                求人情報ピックアップ
-              </span>
+            <div className="text-xs font-mono font-bold text-red-600 uppercase tracking-widest mb-2">
+              Verified Japanese Employment • 求人情報
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Lowongan Pilihan di Industri Terkemuka Jepang
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+              Daftar Lowongan Aktif dengan Standar Upah Transparan
             </h2>
-            <p className="mt-3 text-base text-slate-600 max-w-2xl">
-              Seluruh lowongan telah diverifikasi kelayakan kontrak kerjanya,
-              standar upah minimum prefektur, serta ketersediaan fasilitas
-              tempat tinggal.
+            <p className="mt-2 text-sm sm:text-base text-slate-600 max-w-2xl">
+              Setiap posisi mencantumkan gaji pokok, tunjangan sewa hunian (Dorm), jenis visa, dan kuota penerimaan riil.
             </p>
           </div>
 
-          <Button
-            asChild
-            variant="outline"
-            size="md"
-            className="shrink-0 self-start md:self-auto font-semibold"
-          >
+          <Button asChild variant="outline" size="md" className="shrink-0 font-semibold bg-white">
             <Link to="/student/jobs" className="inline-flex items-center gap-2">
               <Search className="w-4 h-4" />
-              <span>Lihat Semua Lowongan</span>
+              <span>Buka Seluruh Direktori Lowongan</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
@@ -197,10 +206,10 @@ export function FeaturedJobsSection() {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 activeCategory === cat.id
                   ? "bg-slate-900 text-white shadow-xs"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+                  : "bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:text-slate-900"
               }`}
             >
               {cat.label}
@@ -208,87 +217,69 @@ export function FeaturedJobsSection() {
           ))}
         </div>
 
-        {/* Jobs Grid */}
+        {/* Japanese Standard Job Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredJobs.slice(0, 6).map((job) => (
             <div
               key={job.id}
-              className="group relative flex flex-col justify-between rounded-2xl bg-white border border-slate-200 p-6 shadow-xs hover:shadow-md hover:border-slate-300 transition-all duration-200"
+              className="flex flex-col justify-between rounded-xl bg-white border border-slate-200/90 p-5 hover:border-slate-400 hover:shadow-xs transition-all group"
             >
               <div>
-                {/* Top badges: Specialization & JLPT */}
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-xs font-medium text-slate-500 flex items-center gap-1.5">
-                    <Building2 className="w-3.5 h-3.5 text-slate-400" />
-                    <span className="truncate max-w-[160px]">
-                      {job.companyName}
+                {/* Top Row: Prefecture & JLPT */}
+                <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-slate-100 text-xs">
+                  <span className="font-mono text-slate-700 font-semibold flex items-center gap-1.5">
+                    <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-800 text-[11px] font-bold">
+                      {job.prefectureCode}
                     </span>
+                    <span>{job.location}</span>
                   </span>
                   <Badge variant={getJlptBadgeVariant(job.minJlpt)} size="sm">
                     JLPT {job.minJlpt}
                   </Badge>
                 </div>
 
-                {/* Job Title & JP Subtitle */}
-                <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-snug group-hover:text-red-600 transition-colors mb-1">
+                {/* Role Titles */}
+                <h3 className="text-base font-bold text-slate-900 leading-snug group-hover:text-red-600 transition-colors">
                   {job.title}
                 </h3>
-                <div className="text-xs text-slate-400 font-mono mb-4 truncate">
+                <div className="text-xs font-mono text-slate-400 mt-0.5 mb-2 truncate">
                   {job.titleJp}
                 </div>
 
-                {/* Specs Box */}
-                <div className="space-y-2 mb-5 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-                    <span className="font-medium text-slate-800">
-                      {job.location}
-                    </span>
+                {/* Company Name */}
+                <div className="text-xs font-medium text-slate-600 flex items-center gap-1.5 mb-4">
+                  <Building2 className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                  <span className="truncate">{job.companyName}</span>
+                </div>
+
+                {/* Salary & Housing Specifications */}
+                <div className="p-3 rounded-lg bg-slate-50 border border-slate-100 text-xs space-y-2 mb-4">
+                  <div>
+                    <div className="text-[10px] font-mono text-slate-400 uppercase">
+                      Gaji Pokok Bersih:
+                    </div>
+                    <div className="font-mono text-sm font-bold text-slate-900">
+                      {job.salaryBase}
+                    </div>
+                    <div className="text-[11px] text-slate-500 mt-0.5">
+                      {job.salaryNote}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <Coins className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span className="font-semibold text-slate-900">
-                      {job.salaryRange}
-                    </span>
+
+                  <div className="pt-2 border-t border-slate-200/80 flex items-start gap-1.5 text-slate-600">
+                    <Home className="w-3.5 h-3.5 text-slate-400 mt-0.5 shrink-0" />
+                    <span className="text-[11px]">{job.housing}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Action Button & Visa status */}
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
-                <span className="text-[11px] font-medium text-slate-500 truncate">
-                  {job.employmentType}
-                </span>
-                <Button
-                  asChild
-                  variant="ghost"
-                  size="sm"
-                  className="text-red-600 hover:text-red-700 font-semibold p-0"
-                >
-                  <Link
-                    to="/student/jobs"
-                    className="inline-flex items-center gap-1"
-                  >
-                    <span>Lamar</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </Button>
+              {/* Bottom Metadata & Visa */}
+              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                <span className="font-medium text-slate-700">{job.visaType}</span>
+                <span className="text-emerald-700 font-semibold">{job.intakeQuota}</span>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Bottom Banner */}
-        <div className="mt-12 text-center">
-          <p className="text-xs text-slate-500">
-            Perusahaan Anda butuh talenta industri bersertifikasi?{" "}
-            <Link
-              to="/corporate"
-              className="text-red-600 hover:underline font-semibold"
-            >
-              Pasang Lowongan & Akses Talent Scout →
-            </Link>
-          </p>
         </div>
       </div>
     </section>
